@@ -33,8 +33,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'boards',
-    'deposit_infos',
+    'products',
     'finance_vocabs',
+    'dj_rest_auth',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
