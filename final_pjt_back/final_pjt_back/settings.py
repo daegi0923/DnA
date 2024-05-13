@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'boards',
     'deposit_infos',
     'finance_vocabs',
+    'dj_rest_auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
