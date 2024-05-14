@@ -1,11 +1,10 @@
 <template>
-  <div>
+<kakaomap />
 
-  </div>
 </template>
 
 <script setup>
-
+import kakaomap from '@/components/map.vue'
 </script>
 
 <style scoped>

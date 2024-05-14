@@ -48,28 +48,26 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView,
-    },
-    {
-      path: '/community/:id',
-      name: 'communitydetail',
-      component: CommunityDetailView
+      child: [
+        {path: 'community/:id', name: 'communitydetail', component: CommunityDetailView},
+      ]
     },
     {
       path: '/comparison',
       name: 'comparison',
       component: DepositSavingComparisonView,
       children: [
-        {path: '/deposit', name: 'deposit', component: DepositView},
-        {path: '/deposit/:id', name: 'depositdetail', component: DepositDetailView},
-        {path: '/saving', name:'saving', component: SavingView},
-        {path: '/saving/:id', name:'savingdetail', component: SavingDetailView},
+        {path: 'deposit', name: 'deposit', component: DepositView},
+        {path: 'deposit/:id', name: 'depositdetail', component: DepositDetailView},
+        {path: 'saving', name:'saving', component: SavingView},
+        {path: 'saving/:id', name:'savingdetail', component: SavingDetailView},
       ]
     },
     { path: '/community',
       name: 'community',
       component: CommunityView,
       children: [
-        {path: '/community/:id', name: 'communitydetail', component: CommunityDetailView}
+        {path: 'community/:id', name: 'communitydetail', component: CommunityDetailView}
       ]
     },
     {
@@ -77,7 +75,7 @@ const router = createRouter({
       name: 'plan',
       component: SavingPlanerView,
       children: [
-        {path: '/plan/:id', name: 'plandetail', component: PlanDetail},
+        {path: 'plan/:id', name: 'plandetail', component: PlanDetail},
       ]
     },
     {

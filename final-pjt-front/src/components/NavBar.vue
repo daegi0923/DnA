@@ -3,7 +3,8 @@
     <div>
         <div class="nav-container">
             <div class='menu'>  
-                <p>Home</p>    
+                <p>Home</p>
+                <RouterLink :to="{name: 'searchbank'}">searchbank</RouterLink>    
             </div>
         </div>
     </div> 
