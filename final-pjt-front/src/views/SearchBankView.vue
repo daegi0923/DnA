@@ -1,5 +1,6 @@
 <template>
 <kakaomap />
+
 </template>
 
 <script setup>

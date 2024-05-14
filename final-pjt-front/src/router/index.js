@@ -23,10 +23,6 @@ const router = createRouter({
       path: '/',
       name: 'start',
       component: StartPageView ,
-      children: [
-        {path: 'login', name: 'login', component: LoginView},
-        {path: 'signup', name: 'signup', component: SignUpView},
-      ]
     },
     {
       path: '/main',
@@ -81,7 +77,17 @@ const router = createRouter({
       children: [
         {path: 'plan/:id', name: 'plandetail', component: PlanDetail},
       ]
-    }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUpView,
+    },
   ]
 })
 

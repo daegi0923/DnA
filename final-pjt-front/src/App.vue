@@ -1,7 +1,8 @@
 <template>
-<RouterLink :to="{name: 'start'}">start</RouterLink>
-<RouterLink :to="{name: 'main'}">main</RouterLink>
-<RouterView />
+<RouterLink :to="{name: 'start'}"/>
+<TopHeader />
+<NavBar />
+<router-view></router-view>
 </template>
 
 <script setup>
