@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from rest_framework.decorators import api_view
-from django.http import JsonResponse, HttpResponse
 from .serializer import DepositOptionSerializer, DepositProductSerializer, SavingOptionSerializer, SavingProductSerializer
 import requests
 from rest_framework.response import Response
