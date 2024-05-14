@@ -5,14 +5,21 @@
         <p>adsf</p>
       </div>
       <div>
-        <button>Logout</button>
-        <RouterLink :to="{name:'mypage'}"><i class="fa-regular fa-user"></i></RouterLink>
+        <RouterLink :to="{name:'mypage'}"><i class="fa-regular fa-user"></i></RouterLink> | 
+        <div v-if="!store.isLogin">
+        <RouterLink :to="{name:'signup'}" >회원 가입</RouterLink> | 
+        <RouterLink :to="{name:'login'}">로그인</RouterLink>
+        </div>
+
+        <button v-else @click = store.logOut>Logout</button>
       </div>
     </div>
   </template>
   
   <script setup>
-  
+  import { useCounterStore } from '@/stores/counter'
+  const store = useCounterStore()
+
   </script>
   
   <style scoped>
