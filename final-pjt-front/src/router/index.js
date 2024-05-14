@@ -10,7 +10,6 @@ import DepositDetailView from '@/views/comparisonview/DepositDetailView.vue'
 import DepositView from '@/views/comparisonview/DepositView.vue'
 import SavingDetailView from '@/views/comparisonview/SavingDetailView.vue'
 import SavingView from '@/views/comparisonview/SavingView.vue'
-import SavingDetailView from '@/views/comparisonview/SavingDetailView.vue'
 import PlanDetail from '@/views/savingplaner/PlanDetail.vue'
 import SavingPlanerView from '@/views/savingplaner/SavingPlanerView.vue'
 import ExchangeView from '@/views/ExchangeView.vue'
@@ -22,11 +21,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'startpage',
+      name: 'start',
       component: StartPageView ,
       children: [
-        {path: '/login', name: 'login', component: LoginView},
-        {path: '/signup', name: 'signup', component: SignUpView},
+        {path: 'login', name: 'login', component: LoginView},
+        {path: 'signup', name: 'signup', component: SignUpView},
       ]
     },
     {
@@ -53,28 +52,26 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView,
-    },
-    {
-      path: '/community/:id',
-      name: 'communitydetail',
-      component: CommunityDetailView
+      child: [
+        {path: 'community/:id', name: 'communitydetail', component: CommunityDetailView},
+      ]
     },
     {
       path: '/comparison',
       name: 'comparison',
       component: DepositSavingComparisonView,
       children: [
-        {path: '/deposit', name: 'deposit', component: DepositView},
-        {path: '/deposit/:id', name: 'depositdetail', component: DepositDetailView},
-        {path: '/saving', name:'saving', component: SavingView},
-        {path: '/saving/:id', name:'savingdetail', component: SavingDetailView},
+        {path: 'deposit', name: 'deposit', component: DepositView},
+        {path: 'deposit/:id', name: 'depositdetail', component: DepositDetailView},
+        {path: 'saving', name:'saving', component: SavingView},
+        {path: 'saving/:id', name:'savingdetail', component: SavingDetailView},
       ]
     },
     { path: '/community',
       name: 'community',
       component: CommunityView,
       children: [
-        {path: '/community/:id', name: 'communitydetail', component: CommunityDetailView}
+        {path: 'community/:id', name: 'communitydetail', component: CommunityDetailView}
       ]
     },
     {
@@ -82,7 +79,7 @@ const router = createRouter({
       name: 'plan',
       component: SavingPlanerView,
       children: [
-        {path: '/plan/:id', name: 'plandetail', component: PlanDetail},
+        {path: 'plan/:id', name: 'plandetail', component: PlanDetail},
       ]
     }
   ]

@@ -1,12 +1,10 @@
 <template>
-<RouterLink :to="{name: 'start'}"
-<TopHeader />
-<NavBar />
+<RouterLink :to="{name: 'start'}">start</RouterLink>
+<RouterLink :to="{name: 'main'}">main</RouterLink>
+<RouterView />
 </template>
 
 <script setup>
-import TopHeader from '@/components/TopHeader.vue';
-import NavBar from './components/NavBar.vue';
 </script>
 
 <style scoped>
