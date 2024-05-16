@@ -1,10 +1,8 @@
 <template>
-    <div>
-        <h1>게시판</h1>
-        <RouterLink to="/community/create">게시물 작성하기</RouterLink> | 
-        <RouterLink to="/community/list">게시글 목록</RouterLink>
-        <RouterView/>
-    </div>
+  <div>
+      <h1>게시판</h1>
+      <CommunityList/>
+  </div>
 </template>
 
 <script setup>
@@ -16,7 +14,7 @@ import { useCounterStore } from '@/stores/counter'
 
 const store = useCounterStore()
 onMounted(() => {
-  store.getBoardsList()
+store.getBoardsList()
 })
 
 </script>
