@@ -1,6 +1,6 @@
 <template>
-<TopHeader />
-<NavVar />
+<!-- <TopHeader />
+<NavVar /> -->
 <p>main</p>
 <Carousel />
 <ArticleList />

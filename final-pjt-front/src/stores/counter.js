@@ -16,21 +16,20 @@ export const useCounterStore = defineStore('counter', () => {
   })
   const router = useRouter()
 
-  const getArticles = function () {
+  const getBoardsList = function () {
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/articles/`,
-      headers: {
-        Authorization: `Token ${token.value}`
-      }
+      url: `${API_URL}/boards/list/`,
     })
-      .then(response => {
+      .then((response) => {
+        // console.log(response.data);
         articles.value = response.data
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
       })
   }
+  
 
   const signUp = function (payload) {
     const { username, password1, password2 } = payload
@@ -85,5 +84,5 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { articles, API_URL, getArticles, signUp, logIn, token, isLogin, logOut }
+  return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut }
 }, { persist: true })
