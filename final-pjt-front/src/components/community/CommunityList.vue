@@ -10,12 +10,8 @@
 </template>
 
 <script setup>
-import axios from 'axios'
-import { ref } from 'vue'
 import { useCounterStore } from '@/stores/counter'
-import { useRouter } from 'vue-router'
 import CommunityListItem from '@/components/community/CommunityListItem.vue'
-import { storeToRefs } from 'pinia'
 
 const store = useCounterStore()
 

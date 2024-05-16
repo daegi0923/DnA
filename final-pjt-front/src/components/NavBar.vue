@@ -3,10 +3,10 @@
     <div>
         <div class="nav-container">
             <div class='menu'>  
-                <p>Home</p>
+                <RouterLink :to="{name: 'main'}">Home</RouterLink> |
                 <RouterLink :to="{name: 'searchbank'}">은행 찾기</RouterLink> |
                 <RouterLink :to="{name: 'community-list'}">게시판</RouterLink> |     
-                <RouterLink :to="{name: 'comparison'}">예금/적금 정보</RouterLink>    
+                <RouterLink :to="{name: 'deposit'}">예금/적금 정보</RouterLink>    
             </div>
         </div>
     </div> 
