@@ -85,5 +85,19 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { articles, API_URL, getArticles, signUp, logIn, token, isLogin, logOut }
+  const exchangeInfo = ref(null)
+  const exchangeMoney = function() {
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/exchanges/'
+    })
+    .then((response) => {
+      exchangeInfo.value = response.data
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  return { articles, API_URL, getArticles, signUp, logIn, token, isLogin, logOut, exchangeMoney, exchangeInfo }
 }, { persist: true })

@@ -4,7 +4,8 @@
         <div class="nav-container">
             <div class='menu'>  
                 <p>Home</p>
-                <RouterLink :to="{name: 'searchbank'}">searchbank</RouterLink>    
+                <RouterLink :to="{name: 'searchbank'}">searchbank</RouterLink>   
+                <RouterLink :to="{name: 'exchange'}">exchange</RouterLink>" 
             </div>
         </div>
     </div> 
