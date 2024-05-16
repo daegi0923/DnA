@@ -7,6 +7,9 @@ export const useCounterStore = defineStore('counter', () => {
   const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const user_id = ref(null)
+  const user_name = ref(null)
+  const user_nickname = ref(null)
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -61,9 +64,14 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((response) => {
+        console.log(response);
+        console.log(response.data);
         console.log('login success!');
         token.value = response.data.key
+        console.log(username);
+        user_name.value = username
         router.push({ name : 'main' })
+        console.log(user_name.value);
       })
       .catch((error) => {
         console.log(error)
@@ -78,11 +86,16 @@ export const useCounterStore = defineStore('counter', () => {
     .then((response) => {
       console.log('logout success!');
       token.value = null
+      user_id.value = null
+      user_name.value = null
+      user_nickname.value = null
     })
     .catch((error) => {
       console.log(error);
     })
   }
 
-  return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut }
+  return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
+    , user_id, user_name, user_nickname }
+   
 }, { persist: true })

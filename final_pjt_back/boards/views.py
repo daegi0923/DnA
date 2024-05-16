@@ -55,3 +55,11 @@ def read_board_comment(request, board_id):
         comments = board.comment_set.all()
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+@api_view(['DELETE'])
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if request.method == 'DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

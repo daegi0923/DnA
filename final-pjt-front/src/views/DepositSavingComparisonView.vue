@@ -1,11 +1,10 @@
 <template>
     <div>
-><dfd/>
+			<h1>예금 적금 정보 비교</h1>
     </div>
 </template>
 
-<script setup>i
-imprdsfslkdjconmpt
+<script setup>
 </script>
 
 <style scoped>
