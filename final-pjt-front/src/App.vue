@@ -1,5 +1,4 @@
 <template>
-<RouterLink :to="{name: 'start'}"/>
 <TopHeader/>
 <NavBar/>
 <router-view></router-view>

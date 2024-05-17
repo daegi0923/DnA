@@ -2,16 +2,16 @@
     <div class="top-header">
       <div class="row">
         <img src="" alt="">
-        <p>adsf</p>
       </div>
-      <div>
-        <RouterLink :to="{name:'mypage'}"><i class="fa-regular fa-user"></i></RouterLink> | 
+      <div class="right-header">
         <div v-if="!store.isLogin">
-        <RouterLink :to="{name:'signup'}" >회원 가입</RouterLink> | 
-        <RouterLink :to="{name:'login'}">로그인</RouterLink>
+          <RouterLink :to="{name:'signup'}" class="link" > 회원 가입 </RouterLink>
+          <RouterLink :to="{name:'login'}" class="link">로그인</RouterLink>
         </div>
-
-        <button v-else @click = store.logOut>Logout</button>
+        <div v-else>
+          <RouterLink :to="{name:'mypage'}" class="link"><i class="fa-regular fa-user"></i></RouterLink>
+          <button @click = store.logOut class="link">Logout</button>
+        </div>
       </div>
     </div>
   </template>
@@ -27,5 +27,21 @@
     display: flex;
     justify-content: space-between;
     background-color: #088082;
+    color: white;
+    padding: 10px
+  }
+
+  .link{
+    color:white;
+    text-decoration: none;
+    font-size: 20px
+  }
+
+  .right-header{
+    display: flex;
+  }
+
+  span{
+    margin: 5px
   }
   </style>
