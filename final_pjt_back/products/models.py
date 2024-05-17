@@ -11,6 +11,11 @@ class SavingProduct(models.Model):
     join_member = models.TextField()    # 가입 대상
     join_way = models.TextField()   # 가입 방법
     spcl_cnd = models.TextField()   # 우대조건
+    mtrt_int = models.TextField() # 만기 후 이자율
+    max_limit = models.IntegerField(null=True) # 최고 한도
+    dcls_strt_day = models.CharField(max_length=10, null=True)
+    dcls_end_day = models.CharField(max_length=10, null=True)
+    fin_co_subm_day = models.TextField(null=True)
 
 class SavingOption(models.Model):
     product = models.ForeignKey(SavingProduct, on_delete=models.CASCADE) 
@@ -34,6 +39,11 @@ class DepositProduct(models.Model):
     join_member = models.TextField()    # 가입 대상
     join_way = models.TextField()   # 가입 방법
     spcl_cnd = models.TextField()   # 우대조건
+    mtrt_int = models.TextField() # 만기 후 이자율
+    max_limit = models.IntegerField(null=True) # 최고 한도
+    dcls_strt_day = models.CharField(max_length=10, null=True)
+    dcls_end_day = models.CharField(max_length=10, null=True)
+    fin_co_subm_day = models.TextField(null=True)
 
 class DepositOption(models.Model):
     product = models.ForeignKey(DepositProduct, on_delete=models.CASCADE)

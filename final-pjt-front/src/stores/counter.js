@@ -12,6 +12,7 @@ export const useCounterStore = defineStore('counter', () => {
   const user_nickname = ref(null)
   const depositList = ref([])
   const savingList = ref([])
+  const finCompanyList = ref(['전체보기'])
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -117,14 +118,41 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/products/deposit-products/`,
     })
      .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         depositList.value = response.data
+        depositList.value.forEach(element => {
+          if(finCompanyList.find(element.kor_co_name)===undefined){
+            finCompanyList.push(element.kor_co_name)
+          }
+        })
+      })
+     .catch((error) => {
+        console.log(error)
+      })
+  }
+  
+  const getSavingList = ()=>{
+    axios({
+      method: 'get',
+      url: `${API_URL}/products/saving-products/`,
+    })
+     .then((response) => {
+        // console.log(response.data);
+        savingList.value = response.data
+        // console.log(savingList.value);
+        savingList.value.forEach(element => {
+          if(finCompanyList.value.findIndex(item => item === element.kor_co_nm) === -1){
+            finCompanyList.value.push(element.kor_co_nm)
+            // console.log(finCompanyList.value);
+          }
+        })
       })
      .catch((error) => {
         console.log(error)
       })
   }
   return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
-    , user_id, user_name, user_nickname, depositList, savingList, getDepositList,  exchangeMoney, exchangeInfo}
+    , user_id, user_name, user_nickname, depositList, savingList, getDepositList,
+    getSavingList,  exchangeMoney, exchangeInfo, finCompanyList}
    
 }, { persist: true })

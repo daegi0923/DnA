@@ -23,8 +23,10 @@ def save_deposit_products(request):
     # print(options)
     for baseinfo in baseinfos:
         serializer = DepositProductSerializer(data = baseinfo)
-        if serializer.is_valid():
+        print(baseinfo)
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
+            print('save success')
     for option in options:
         # print(option)
         serializer = DepositOptionSerializer(data = option)
@@ -99,8 +101,7 @@ def saving_products(request):
 @api_view(["GET"])
 def saving_product_options(request, saving_product_id):
     saving_product = SavingProduct.objects.get(id = saving_product_id)
-    options = SavingOption.objects.filter(fin_prdt_cd = saving_product.fin_prdt_cd)
-    serializer = SavingOptionSerializer(options, many = True)
+    serializer = SavingProductSerializer(saving_product)
     print(serializer)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
