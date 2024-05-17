@@ -3,9 +3,10 @@
     <div>
         <div class="nav-container">
             <div class='menu'>  
-                <p>Home</p>
-                <RouterLink :to="{name: 'searchbank'}">searchbank</RouterLink>   
-                <RouterLink :to="{name: 'exchange'}">exchange</RouterLink>" 
+                <RouterLink :to="{name: 'main'}">Home</RouterLink> |
+                <RouterLink :to="{name: 'searchbank'}">은행 찾기</RouterLink> |
+                <RouterLink :to="{name: 'community-list'}">게시판</RouterLink> |     
+                <RouterLink :to="{name: 'deposit'}">예금/적금 정보</RouterLink>    
             </div>
         </div>
     </div> 
@@ -18,7 +19,7 @@
 
 <style scoped>
 .nav-container {
-display: flex; /* 주축과 교차축 나눠서 아이템식 */
+display: flex;  /*주축과 교차축 나눠서 아이템식*/
 justify-content: space-between;
 background-color: #fff;
 width: 100%;

@@ -15,6 +15,8 @@ import SavingPlanerView from '@/views/savingplaner/SavingPlanerView.vue'
 import ExchangeView from '@/views/ExchangeView.vue'
 import SearchBankView from '@/views/SearchBankView.vue'
 import DepositSavingComparisonView from '@/views/DepositSavingComparisonView.vue'
+import CommunityCreateView from '@/views/community/CommunityCreateView.vue'
+import CommunityListView from '@/views/community/CommunityListView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,29 +47,24 @@ const router = createRouter({
       component: ExchangeView
     },
     {
-      path: '/community',
-      name: 'community',
-      component: CommunityView,
-      child: [
-        {path: 'community/:id', name: 'communitydetail', component: CommunityDetailView},
-      ]
-    },
-    {
       path: '/comparison',
       name: 'comparison',
       component: DepositSavingComparisonView,
       children: [
         {path: 'deposit', name: 'deposit', component: DepositView},
-        {path: 'deposit/:id', name: 'depositdetail', component: DepositDetailView},
+        {path: 'deposit/:id', name: 'depositDetail', component: DepositDetailView},
         {path: 'saving', name:'saving', component: SavingView},
-        {path: 'saving/:id', name:'savingdetail', component: SavingDetailView},
+        {path: 'saving/:id', name:'savingDetail', component: SavingDetailView},
       ]
     },
     { path: '/community',
       name: 'community',
       component: CommunityView,
       children: [
-        {path: 'community/:id', name: 'communitydetail', component: CommunityDetailView}
+        {path: 'list', name: 'community-list', component: CommunityListView},
+        {path: ':id', name: 'community-detail', component: CommunityDetailView},
+        {path: 'create', name: 'community-create', component: CommunityCreateView},
+        {path: 'update/:id', name: 'community-update', component: CommunityCreateView, props:true},
       ]
     },
     {

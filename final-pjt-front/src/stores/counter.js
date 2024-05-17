@@ -7,6 +7,11 @@ export const useCounterStore = defineStore('counter', () => {
   const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const user_id = ref(null)
+  const user_name = ref(null)
+  const user_nickname = ref(null)
+  const depositList = ref([])
+  const savingList = ref([])
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -16,21 +21,20 @@ export const useCounterStore = defineStore('counter', () => {
   })
   const router = useRouter()
 
-  const getArticles = function () {
+  const getBoardsList = function () {
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/articles/`,
-      headers: {
-        Authorization: `Token ${token.value}`
-      }
+      url: `${API_URL}/boards/list/`,
     })
-      .then(response => {
+      .then((response) => {
+        // console.log(response.data);
         articles.value = response.data
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
       })
   }
+  
 
   const signUp = function (payload) {
     const { username, password1, password2 } = payload
@@ -62,9 +66,14 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((response) => {
+        console.log(response);
+        console.log(response.data);
         console.log('login success!');
         token.value = response.data.key
+        console.log(username);
+        user_name.value = username
         router.push({ name : 'main' })
+        console.log(user_name.value);
       })
       .catch((error) => {
         console.log(error)
@@ -79,6 +88,9 @@ export const useCounterStore = defineStore('counter', () => {
     .then((response) => {
       console.log('logout success!');
       token.value = null
+      user_id.value = null
+      user_name.value = null
+      user_nickname.value = null
     })
     .catch((error) => {
       console.log(error);
@@ -99,5 +111,20 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { articles, API_URL, getArticles, signUp, logIn, token, isLogin, logOut, exchangeMoney, exchangeInfo }
+  const getDepositList = ()=>{
+    axios({
+      method: 'get',
+      url: `${API_URL}/products/deposit-products/`,
+    })
+     .then((response) => {
+        console.log(response.data);
+        depositList.value = response.data
+      })
+     .catch((error) => {
+        console.log(error)
+      })
+  }
+  return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
+    , user_id, user_name, user_nickname, depositList, savingList, getDepositList,  exchangeMoney, exchangeInfo}
+   
 }, { persist: true })

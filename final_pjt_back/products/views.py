@@ -52,9 +52,9 @@ def deposit_products(request):
             return Response({"messege" : "이미 있는 데이터이거나, 데이터가 잘못 입력되었습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["GET"])
-def deposit_product_options(request, fin_prdt_cd):
-    options = DepositOption.objects.filter(fin_prdt_cd = fin_prdt_cd)
-    serializer = DepositOptionSerializer(options, many = True)
+def deposit_product_options(request, deposit_product_id):
+    deposit_product = DepositProduct.objects.get(id = deposit_product_id)
+    serializer = DepositProductSerializer(deposit_product)
     print(serializer)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -97,8 +97,9 @@ def saving_products(request):
             return Response({"messege" : "이미 있는 데이터이거나, 데이터가 잘못 입력되었습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["GET"])
-def saving_product_options(request, fin_prdt_cd):
-    options = SavingOption.objects.filter(fin_prdt_cd = fin_prdt_cd)
+def saving_product_options(request, saving_product_id):
+    saving_product = SavingProduct.objects.get(id = saving_product_id)
+    options = SavingOption.objects.filter(fin_prdt_cd = saving_product.fin_prdt_cd)
     serializer = SavingOptionSerializer(options, many = True)
     print(serializer)
     return Response(serializer.data, status=status.HTTP_200_OK)
