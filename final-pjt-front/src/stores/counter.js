@@ -10,6 +10,8 @@ export const useCounterStore = defineStore('counter', () => {
   const user_id = ref(null)
   const user_name = ref(null)
   const user_nickname = ref(null)
+  const depositList = ref([])
+  const savingList = ref([])
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -95,7 +97,20 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const getDepositList = ()=>{
+    axios({
+      method: 'get',
+      url: `${API_URL}/products/deposit-products/`,
+    })
+     .then((response) => {
+        console.log(response.data);
+        depositList.value = response.data
+      })
+     .catch((error) => {
+        console.log(error)
+      })
+  }
   return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
-    , user_id, user_name, user_nickname }
+    , user_id, user_name, user_nickname, depositList, savingList, getDepositList}
    
 }, { persist: true })
