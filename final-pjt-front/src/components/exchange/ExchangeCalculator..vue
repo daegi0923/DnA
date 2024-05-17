@@ -32,6 +32,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useCounterStore } from '@/stores/counter';
+import { parse } from 'vue/compiler-sfc';
 
 
 const exchangeStore = useCounterStore();
@@ -40,18 +41,27 @@ const selectedReceiveCountry = ref(null);
 const amount = ref(0);
 const convertedAmount = ref(0);
 
+const parseRate = (rate) => {
+  // 쉼표를 제거하고 숫자로 변환
+  return parseFloat(rate.replace(/,/g, ''));
+};
+
 
 const calculateConversion = () => {
       if (selectedSendCountry.value && selectedReceiveCountry.value && amount.value > 0) {
-        const sendRate = selectedSendCountry.value.deal_bas_r ? selectedSendCountry.value.deal_bas_r : 1;
-        const receiveRate = selectedReceiveCountry.value.deal_bas_r ? selectedReceiveCountry.value.deal_bas_r : 1;
+        const sendRate = parseRate(selectedSendCountry.value.deal_bas_r);
+        const receiveRate = parseRate(selectedReceiveCountry.value.deal_bas_r)
 
-        if (selectedSendCountry.value.cur_unit === 'KRW') {
-          convertedAmount.value = (amount.value * receiveRate) / 10000;
-        } else if (selectedReceiveCountry.value.cur_unit === 'KRW') {
-          convertedAmount.value = (amount.value * 10000) / sendRate;
+        if (selectedSendCountry.value.cur_unit === 'JPY(100)' && selectedReceiveCountry.value.cur_unit === 'KRW') {
+          convertedAmount.value = (amount.value * sendRate) / 100;
+        } else if (selectedSendCountry.value.cur_unit === 'IDR(100)' && selectedReceiveCountry.value.cur_unit === 'KRW') {
+          convertedAmount.value = (amount.value * sendRate) / 100;
+        } else if (selectedSendCountry.value.cur_unit === 'KRW' && selectedReceiveCountry.value.cur_unit == 'JPY(100)') {
+          convertedAmount.value = (amount.value * 100) / receiveRate;
+        } else if (selectedSendCountry.value.cur_unit === 'KRW' && selectedReceiveCountry.value.cur_unit == 'IDR(100)') {
+          convertedAmount.value = (amount.value * 100) / receiveRate;
         } else {
-          convertedAmount.value = (amount.value * receiveRate) / sendRate;
+          convertedAmount.value = (amount.value * sendRate) / receiveRate;
         }
       } else {
         convertedAmount.value = null;
