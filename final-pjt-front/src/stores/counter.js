@@ -97,6 +97,20 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const exchangeInfo = ref(null)
+  const exchangeMoney = function() {
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/exchanges/'
+    })
+    .then((response) => {
+      exchangeInfo.value = response.data
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
   const getDepositList = ()=>{
     axios({
       method: 'get',
@@ -111,6 +125,6 @@ export const useCounterStore = defineStore('counter', () => {
       })
   }
   return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
-    , user_id, user_name, user_nickname, depositList, savingList, getDepositList}
+    , user_id, user_name, user_nickname, depositList, savingList, getDepositList,  exchangeMoney, exchangeInfo}
    
 }, { persist: true })

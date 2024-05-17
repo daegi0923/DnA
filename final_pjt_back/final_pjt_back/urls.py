@@ -23,4 +23,6 @@ urlpatterns = [
     path('boards/', include('boards.urls')),
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
+    path('finance_vocabs/', include('finance_vocabs.urls')),
+    path('exchanges/', include('exchanges.urls')),
 ]
