@@ -2,23 +2,39 @@
 	<div>
 		<h1>DepositList</h1>
 		<!-- {{ store.depositList }} -->
-		<v-table v-if="store.depositList">
+    <div>
+      <h2>검색하기</h2>
+      <p>
+      </p>
+      <v-select v-model="finCoName"
+      label="금융 회사명"
+      :items="store.finCompanyList">
+      </v-select>
+      <v-select v-model="savingTerm"
+      label="만기(개월)"
+      :items="[1, 3, 6, 12, 24, 36]">
+      </v-select>
+      <v-btn @click="filterCoName">검색</v-btn>
+    </div>
+
+		<v-table v-if="result">
      <thead>
        <tr>
-         <!-- <th>item</th> -->
-         <th>ID</th>
-         <th>은행</th>
-         <th>상품코드</th>
-         <th>상품 이름</th>
+        <!-- <th>item</th> -->
+        <th>은행</th>
+        <th>상품 이름</th>
+        <th>기본 금리</th>
+        <th>최고 금리(우대금리 포함)</th>
+        <th>만기(개월)</th>
        </tr>
      </thead>
      <tbody>
-       <tr v-for="deposit in store.depositList" :key="deposit.id" @click="gotoDetail(deposit.id)">
-			 	 <!-- <td>{{ deposit }}</td> -->
-         <td>{{ deposit.fin_prdt_cd }}</td>
-         <td>{{ deposit.fin_co_no }}</td>
+       <tr v-for="deposit in result" :key="deposit.id" @click="gotoDetail(deposit.id)">
          <td>{{ deposit.kor_co_nm }}</td>
          <td>{{ deposit.fin_prdt_nm }}</td>
+         <td>{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate }}</td>
+         <td>{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate2 }}</td>
+         <td>{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).save_trm }}</td>
        </tr>
      </tbody>
    </v-table>
@@ -27,22 +43,54 @@
 
 <script setup>
 import axios from 'axios'
-import { onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { useRouter } from 'vue-router'
-import CommunityListItem from '@/components/community/CommunityListItem.vue'
 
 
 const store = useCounterStore()
-const router = useRouter()
-onMounted(() => {
-		store.getDepositList()
+const finCoName = ref('전체보기')
+const savingTerm = ref(1)
+const result = ref([])
+
+const selectedOption = computed((product) => {
+  return product.depositoption_set.find(el=>el.save_trm === savingTerm.value)
 })
 
 const gotoDetail = (depositId) => {
   router.push({ name: 'depositDetail' , params: { id: depositId }})
 }
 
+const filterCoName = () => {
+  if(finCoName.value === '전체보기'){
+    result.value = store.depositList
+  }else{
+    result.value = store.depositList.filter(saving => saving.kor_co_nm === finCoName.value)
+  }
+  filterSavingTerm()
+}
+const filterSavingTerm = () => {
+  result.value = result.value.filter(el=> {
+    const hasTerm = el.depositoption_set.find(op=>{
+      return op.save_trm === savingTerm.value
+    })
+    return hasTerm
+  })
+}
+const sortByOption = (option) => {
+  console.log('click');
+  result.value = result.value.sort((a, b) => {
+    console.log(a, b);
+
+
+    return a[option] - b[option]
+  })
+}
+const router = useRouter()
+onMounted(() => {
+    store.getDepositList()
+    result.value = store.depositList
+})
 
 </script>
 
