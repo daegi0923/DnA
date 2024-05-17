@@ -13,7 +13,7 @@
        </tr>
      </thead>
      <tbody>
-       <tr v-for="deposit in store.depositList" :key="deposit.id">
+       <tr v-for="deposit in store.depositList" :key="deposit.id" @click="gotoDetail(deposit.id)">
 			 	 <!-- <td>{{ deposit }}</td> -->
          <td>{{ deposit.fin_prdt_cd }}</td>
          <td>{{ deposit.fin_co_no }}</td>
@@ -34,9 +34,14 @@ import CommunityListItem from '@/components/community/CommunityListItem.vue'
 
 
 const store = useCounterStore()
+const router = useRouter()
 onMounted(() => {
 		store.getDepositList()
 })
+
+const gotoDetail = (depositId) => {
+  router.push({ name: 'depositDetail' , params: { id: depositId }})
+}
 
 
 </script>

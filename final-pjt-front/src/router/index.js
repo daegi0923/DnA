@@ -52,9 +52,9 @@ const router = createRouter({
       component: DepositSavingComparisonView,
       children: [
         {path: 'deposit', name: 'deposit', component: DepositView},
-        {path: 'deposit/:id', name: 'depositdetail', component: DepositDetailView},
+        {path: 'deposit/:id', name: 'depositDetail', component: DepositDetailView},
         {path: 'saving', name:'saving', component: SavingView},
-        {path: 'saving/:id', name:'savingdetail', component: SavingDetailView},
+        {path: 'saving/:id', name:'savingDetail', component: SavingDetailView},
       ]
     },
     { path: '/community',
