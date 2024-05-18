@@ -10,5 +10,6 @@ urlpatterns = [
     path('save-saving-products/', views.save_saving_products, name= 'save_saving_products'),
     path('saving-products/', views.saving_products, name= 'saving_products'),
     path('saving-product-options/<int:saving_product_id>/', views.saving_product_options, name= 'saving_product_options'),
-
+    path('subscribe-saving/<int:saving_option_id>/', views.subscribe_saving, ),
+    path('subscribe-deposit/<int:deposit_option_id>/', views.subscribe_deposit, ),
 ]
