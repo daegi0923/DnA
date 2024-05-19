@@ -127,8 +127,6 @@ export const useCounterStore = defineStore('counter', () => {
       })
     }
 
-
-
   const getDepositList = ()=>{
     axios({
       method: 'get',
@@ -171,5 +169,6 @@ export const useCounterStore = defineStore('counter', () => {
   return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
     , user_id, user_name, user_nickname, depositList, savingList, getDepositList,
     getSavingList,  exchangeMoney, exchangeInfo, finCompanyList, vocaList, getVocaList}
+
    
 }, { persist: true })
