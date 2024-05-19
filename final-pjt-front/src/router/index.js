@@ -17,6 +17,9 @@ import SearchBankView from '@/views/SearchBankView.vue'
 import DepositSavingComparisonView from '@/views/DepositSavingComparisonView.vue'
 import CommunityCreateView from '@/views/community/CommunityCreateView.vue'
 import CommunityListView from '@/views/community/CommunityListView.vue'
+import Profile from '@/components/mypage/Profile.vue'
+import UpdateUser from '@/components/mypage/UpdateUser.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +38,10 @@ const router = createRouter({
       path: '/mypage',
       name: 'mypage',
       component: MyPageView,
+      children: [
+        {path: '/profile', name: 'profile', component: Profile},
+        {path: '/profile/update', name: 'updateUser', component: UpdateUser},
+      ]
     },
     {
       path: '/searchbank',
