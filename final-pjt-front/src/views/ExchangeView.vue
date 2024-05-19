@@ -1,19 +1,32 @@
 <template>
-<p>exchange</p>
+    <ExchangeCalculator />
 <h1>환율 정보</h1>
-<ExchangeCalculator />
-<div v-for="exchange in exchangeStore.exchangeInfo">
-    <p>국가: {{ exchange.cur_nm }}</p>
-    <p>송금받을때 : {{ exchange.ttb }}</p>
-    <p>송금보낼때 : {{ exchange.tts }}</p>
-    <p>매매기준율 : {{ exchange.deal_bas_r }}</p>
-    <p>장부가격 : {{ exchange.bkpr }}</p>
-    <hr>
-</div>
+<v-table>
+    <thead>
+        <tr>
+            <th>국가</th>
+            <th>송금받을때</th>
+            <th>송금보낼때</th>
+            <th>매매기준율</th>
+            <th>장부가격</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-for="exchange in exchangeStore.exchangeInfo">
+            <td>{{ exchange.cur_nm }}</td>
+            <td>{{ exchange.ttb }}</td>
+            <td>{{ exchange.tts }}</td>
+            <td>{{ exchange.deal_bas_r }}</td>
+            <td>{{ exchange.bkpr }}</td>
+        </tr>
+    </tbody>
+
+</v-table>
+
 </template>
 
 <script setup>
-import ExchangeCalculator from '@/components/ExchangeCalculator..vue';
+import ExchangeCalculator from '@/components/exchange/ExchangeCalculator..vue';
 import { useCounterStore } from '@/stores/counter';
 import { onMounted } from 'vue';
 

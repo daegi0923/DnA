@@ -19,6 +19,14 @@ export default defineConfig({
         target: 'https://news.naver.com',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
+      },
+      '/openai': {
+        target: 'https://api.openai.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/openai/, ''),
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
       }
     }
   }

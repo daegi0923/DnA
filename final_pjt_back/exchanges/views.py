@@ -2,17 +2,25 @@ import requests
 from .models import ExchangeRate
 from django.http import JsonResponse
 from .serializers import ExchangeRateSerializer
+from datetime import datetime, timedelta
 
+now = datetime.now()
 BASE_URL = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON'
 def index(request):
-    url = BASE_URL
+    if now.hour < 11:
+        search_data = now - timedelta(days=1)
+    else:
+        search_data = now
+
+    search_data_str = search_data.strftime('%Y%m%d')
+
     params = {
         'authkey': '1vdtuLiU3mNqNTMqu3VhqpXIEfb9HgCx',
+        'searchdate': search_data_str,
         'data': 'AP01'
     }
-    response = requests.get(url, params=params).json()
+    response = requests.get(BASE_URL, params=params).json()
     return JsonResponse(response, safe=False)
-
 
 
 

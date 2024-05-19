@@ -1,11 +1,11 @@
 <template>
     <div>
-        <p>커뮤니티 디테일</p>
+        <CommunityDetail/>
     </div>
 </template>
 
 <script setup>
-
+import CommunityDetail from '@/components/community/CommunityDetail.vue'
 </script>
 
 <style scoped>
