@@ -69,6 +69,7 @@ def save_saving_products(request):
     options = data.get('optionList')
     # print(options)
     for baseinfo in baseinfos:
+        print(baseinfo)
         serializer = SavingProductSerializer(data = baseinfo)
         if serializer.is_valid():
             serializer.save()
