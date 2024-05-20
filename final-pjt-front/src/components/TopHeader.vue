@@ -9,7 +9,7 @@
           <RouterLink :to="{name:'login'}" class="link">로그인</RouterLink>
         </div>
         <div v-else>
-          <RouterLink :to="{name:'mypage'}" class="link"><i class="fa-regular fa-user"></i></RouterLink>
+          <RouterLink :to="{name:'profile', params:{username: store.user_name}}" class="link"><i class="fa-regular fa-user"></i></RouterLink>
           <button @click = store.logOut class="link">Logout</button>
         </div>
       </div>

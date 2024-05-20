@@ -17,12 +17,20 @@ class UserSerializer(serializers.ModelSerializer):
             'username': instance.username
         }
 
+class BoardBreafSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Board
+        fields = '__all__'
+
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
         read_only_fields = ('board', 'created_at')
     user = UserSerializer(read_only=True)
+    board = BoardBreafSerializer(read_only=True)
+
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:

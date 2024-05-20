@@ -10,8 +10,8 @@ class User(AbstractUser):
 
 class SubscribedSaving(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    saving_option = models.ForeignKey(SavingOption, on_delete=models.CASCADE)
+    saving_option = models.ForeignKey(SavingOption, on_delete=models.CASCADE, related_name='saving_subscribed')
     
 class SubscribedDeposit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    deposit_option = models.ForeignKey(DepositOption, on_delete=models.CASCADE)
+    deposit_option = models.ForeignKey(DepositOption, on_delete=models.CASCADE, related_name='deposit_subscribed')

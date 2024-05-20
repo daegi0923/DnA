@@ -119,7 +119,7 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/finance_vocabs/get_finance_vocas/`,
     })
      .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         vocaList.value = response.data
       })
      .catch((error) => {
@@ -136,10 +136,12 @@ export const useCounterStore = defineStore('counter', () => {
      .then((response) => {
         // console.log(response.data);
         depositList.value = response.data
+        console.log(finCompanyList);
         depositList.value.forEach(element => {
-          if(finCompanyList.find(element.kor_co_name)===undefined){
-            finCompanyList.push(element.kor_co_name)
+          if(finCompanyList.value.find(element.kor_co_name)===undefined){
+            finCompanyList.value.push(element.kor_co_name)
           }
+
         })
       })
      .catch((error) => {

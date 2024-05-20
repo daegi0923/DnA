@@ -19,8 +19,8 @@
         :items="[1, 3, 6, 12, 24, 36]">
         </v-select>
         <v-btn @click="filterCoName">검색</v-btn>
-      </div>
-		<v-table v-if="result">
+    </div>
+		<v-data-table v-if="result">
       <thead>
       <tr>
         <!-- <th>item</th> -->
@@ -44,7 +44,7 @@
         <td>{{ saving.savingoption_set.filter(el=>el.save_trm===savingTerm).find((el)=>el.rsrv_type_nm ===savingType).intr_rate_type_nm }}</td>
       </tr>
       </tbody>
-   </v-table>
+   </v-data-table>
 	</div>
 </template>
 
