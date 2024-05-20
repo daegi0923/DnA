@@ -39,7 +39,7 @@ const router = createRouter({
       component: MyPageView,
       children: [
         {path: ':username', name: 'profile', component: Profile},
-        {path: 'update', name: 'updateUser', component: UpdateUser},
+        {path: ':username/update', name: 'updateUser', component: UpdateUser},
       ]
     },
     {

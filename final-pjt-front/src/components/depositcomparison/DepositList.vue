@@ -29,12 +29,12 @@
        </tr>
      </thead>
      <tbody>
-       <tr v-for="deposit in result" :key="deposit.id" @click="gotoDetail(deposit.id)">
-         <td>{{ deposit.kor_co_nm }}</td>
-         <td>{{ deposit.fin_prdt_nm }}</td>
-         <td v-if="savingTerm">{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate }}</td>
-         <td v-if="savingTerm">{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate2 }}</td>
-         <td v-if="savingTerm">{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).save_trm }}</td>
+       <tr v-for="deposit in result" :key="deposit.id" @click="gotoDetail(deposit.product_info.id)">
+         <td>{{ deposit.product_info.kor_co_nm }}</td>
+         <td>{{ deposit.product_info.fin_prdt_nm }}</td>
+         <td>{{ deposit.intr_rate }}</td>
+         <td>{{ deposit.intr_rate2 }}</td>
+         <td>{{ deposit.save_trm }}</td>
        </tr>
      </tbody>
    </v-table>
@@ -51,41 +51,18 @@ import { useRouter } from 'vue-router'
 const store = useCounterStore()
 const finCoName = ref('전체보기')
 const savingTerm = ref(1)
-const result = ref([])
-
-const selectedOption = computed((product) => {
-  return product.depositoption_set.find(el=>el.save_trm === savingTerm.value)
+const result = computed(() => {;
+  if(finCoName.value === '전체보기'){
+    return store.depositList.filter(el=>el.save_trm === savingTerm.value)
+  }else{
+    return store.depositList.filter(el=>el.save_trm === savingTerm.value).filter(el=> el.product_info.kor_co_nm === finCoName.value)
+  }
 })
 
 const gotoDetail = (depositId) => {
   router.push({ name: 'depositDetail' , params: { id: depositId }})
 }
 
-const filterCoName = () => {
-  if(finCoName.value === '전체보기'){
-    result.value = store.depositList
-  }else{
-    result.value = store.depositList.filter(saving => saving.kor_co_nm === finCoName.value)
-  }
-  filterSavingTerm()
-}
-const filterSavingTerm = () => {
-  result.value = result.value.filter(el=> {
-    const hasTerm = el.depositoption_set.find(op=>{
-      return op.save_trm === savingTerm.value
-    })
-    return hasTerm
-  })
-}
-const sortByOption = (option) => {
-  console.log('click');
-  result.value = result.value.sort((a, b) => {
-    console.log(a, b);
-
-
-    return a[option] - b[option]
-  })
-}
 const router = useRouter()
 onMounted(() => {
     store.getDepositList()

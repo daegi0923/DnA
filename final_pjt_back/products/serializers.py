@@ -5,7 +5,7 @@ class SavingOptionSerializer(serializers.ModelSerializer):
     class SavingProductInfoSerializer(serializers.ModelSerializer):
         class Meta:
             model = SavingProduct
-            fields = '__all__'
+            fields = ('id', 'fin_prdt_cd', 'fin_prdt_nm','fin_co_no','kor_co_nm',)
     class Meta:
         model = SavingOption
         fields = '__all__'
@@ -23,7 +23,7 @@ class DepositOptionSerializer(serializers.ModelSerializer):
     class DepositProductInfoSerializer(serializers.ModelSerializer):
         class Meta:
             model = DepositProduct
-            fields = '__all__'
+            fields = ('id', 'fin_prdt_cd', 'fin_prdt_nm','fin_co_no','kor_co_nm')
     class Meta:
         model = DepositOption
         fields = '__all__'
