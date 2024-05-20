@@ -18,7 +18,6 @@
         label="만기(개월)"
         :items="[1, 3, 6, 12, 24, 36]">
         </v-select>
-        <v-btn @click="filterCoName">검색</v-btn>
     </div>
 		<v-data-table v-if="result">
       <thead>
@@ -34,14 +33,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="saving in result" :key="saving.id" @click="gotoDetail(saving.id)">
-        <td>{{ saving.kor_co_nm }}</td>
-        <td>{{ saving.fin_prdt_nm }}</td>
-        <td>{{ saving.savingoption_set.filter(el=>el.save_trm===savingTerm).find((el)=>el.rsrv_type_nm ===savingType).intr_rate }}</td>
-        <td>{{ saving.savingoption_set.filter(el=>el.save_trm===savingTerm).find((el)=>el.rsrv_type_nm ===savingType).intr_rate2 }}</td>
-        <td>{{ saving.savingoption_set.filter(el=>el.save_trm===savingTerm).find((el)=>el.rsrv_type_nm ===savingType).rsrv_type_nm }}</td>
-        <td>{{ saving.savingoption_set.filter(el=>el.save_trm===savingTerm).find((el)=>el.rsrv_type_nm ===savingType).save_trm }}</td>
-        <td>{{ saving.savingoption_set.filter(el=>el.save_trm===savingTerm).find((el)=>el.rsrv_type_nm ===savingType).intr_rate_type_nm }}</td>
+      <tr v-for="saving in result" :key="saving.id" @click="gotoDetail(saving.product_info.id)">
+        <td>{{ saving.product_info.kor_co_nm }}</td>
+        <td>{{ saving.product_info.fin_prdt_nm }}</td>
+        <td>{{ saving.intr_rate }}</td>
+        <td>{{ saving.intr_rate2 }}</td>
+        <td>{{ saving.rsrv_type_nm }}</td>
+        <td>{{ saving.save_trm }}</td>
+        <td>{{ saving.intr_rate_type_nm }}</td>
       </tr>
       </tbody>
    </v-data-table>
@@ -50,7 +49,7 @@
 
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { useRouter } from 'vue-router'
 import { ClickOutside } from 'vuetify/lib/directives/index.mjs';
@@ -58,50 +57,29 @@ import { ClickOutside } from 'vuetify/lib/directives/index.mjs';
 
 const store = useCounterStore()
 const router = useRouter()
-const result = ref([])
 const finCoName = ref('전체보기')
 const savingType = ref('자유적립식')
 const savingTerm = ref(1)
+
+const result = computed(() => {
+  console.log(result);
+  if(finCoName.value === '전체보기'){
+    return store.savingList.filter(el=>el.save_trm === savingTerm.value).filter(el=>el.rsrv_type_nm === savingType.value)
+  }else{
+    return store.savingList.filter(el=>el.save_trm === savingTerm.value).filter(el=> el.product_info.kor_co_nm === finCoName.value).filter(el=>el.rsrv_type_nm === savingType.value)
+  }
+})
 
 
 const gotoDetail = (savingId) => {
   router.push({ name: 'savingDetail' , params: { id: savingId }})
 }
 
-const filterCoName = () => {
-  if(finCoName.value === '전체보기'){
-    result.value = store.savingList
-  }else{
-  result.value = store.savingList.filter(saving => saving.kor_co_nm === finCoName.value)
-  }
-  filterSavingtype()
-  filterSavingTerm()
-}
-
-const filterSavingtype = () => {
-  result.value = result.value.filter(el=> {
-      const hasOption = el.savingoption_set.find(op=>{
-        return op.rsrv_type_nm === savingType.value
-      })
-      return hasOption
-  })
-}
-
-const filterSavingTerm = () => {
-  result.value = result.value.filter(el=> {
-      const hasTerm = el.savingoption_set.find(op=>{
-        return op.save_trm === savingTerm.value
-      })
-      return hasTerm
-  })
-}
 
 
 onMounted(() => {
 		store.getSavingList()
-    result.value = store.savingList
-    filterSavingtype()
-    filterSavingTerm()
+    console.log(store.depositList);
   })
 </script>
 

@@ -44,8 +44,12 @@
           </li>
         </ul>
       </div>
-      <h3>금리 그래프</h3>
-      <Graph :userInfo="userInfo"></Graph>
+      <h3>가입한 예금 상품</h3>
+      <Graph :productType="'deposit'"></Graph>
+      <hr>
+      <h3>가입한 적금 상품</h3>
+      <Graph :productType="'saving'"></Graph>
+
     </div>
 </template>
 
@@ -71,18 +75,27 @@ const getUserInfo = () => {
   .then((res)=>{
     console.log(res.data);
     userInfo.value = res.data;
-    pStore.labels.value = []
-    pStore.basicRates.value = []
-    pStore.maxRates.value = []
-    console.log(Boolean(userInfo.value));
-    console.log(Boolean(userInfo.subscribed_deposits));
+    pStore.depositsLabelList.value = [];
+    pStore.depositsBasicRateList.value = [];
+    pStore.depositsMaxRateList.value = [];
     if (userInfo.value && userInfo.value.subscribed_deposits){
       userInfo.value.subscribed_deposits.forEach(deposit => {
-        pStore.labels.value.push(deposit.product_info.fin_prdt_nm)
-        pStore.basicRates.value.push(deposit.intr_rate)
-        pStore.maxRates.value.push(deposit.intr_rate2)
+        pStore.depositsLabelList.value.push(deposit.product_info.fin_prdt_nm)
+        pStore.depositsBasicRateList.value.push(deposit.intr_rate)
+        pStore.depositsMaxRateList.value.push(deposit.intr_rate2)
       })
-  }})
+    }
+    pStore.savingsLabelList.value = [];
+    pStore.savingsBasicRateList.value = [];
+    pStore.savingsMaxRateList.value = [];
+    if (userInfo.value && userInfo.value.subscribed_savings){
+      userInfo.value.subscribed_savings.forEach(saving => {
+        pStore.savingsLabelList.value.push(saving.product_info.fin_prdt_nm)
+        pStore.savingsBasicRateList.value.push(saving.intr_rate)
+        pStore.savingsMaxRateList?.value.push(saving.intr_rate2)
+      })
+    }
+})
   .catch((err)=>{
     console.log(err);
   })
@@ -90,9 +103,6 @@ const getUserInfo = () => {
 
 onMounted(() => {
   getUserInfo()
-  console.log(pStore.labels.value);
-  console.log(pStore.basicRates.value);
-  console.log(pStore.maxRates.value);
 })
 </script>
 
