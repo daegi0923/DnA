@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse
 import xml.etree.ElementTree as ET
 from .serializers import VocasSerializer
 from .models import Vocas
+import re
 
 # Create your views here.
 
@@ -24,13 +25,11 @@ def index(request):
 def save_finance_voca(request):
     params = {
         'serviceKey': API_KEY,
-
     }
 
-    response = requests.get(BASE_URL, params=params)  
+    response = requests.get(BASE_URL, params=params)
     
     root = ET.fromstring(response.content)
-    items = root.find('.//items')
     totalCount = int(root.find('.//totalCount').text)
     numOfRows = int(root.find('.//numOfRows').text)
     totalPages = (totalCount // numOfRows) + (1 if totalCount % numOfRows > 0 else 0)
@@ -39,21 +38,27 @@ def save_finance_voca(request):
     for page in range(1, totalPages + 1):
         params['pageNo'] = int(page)
         response = requests.get(BASE_URL, params=params)
+        
         if response.status_code == 200:
             root = ET.fromstring(response.content)
             items = root.find('.//items')
-
+        
             if items is not None:
                 for item in items.findall('item'):
-                    data = {
-                        'fnceDictNm': item.find('fnceDictNm').text,
-                        'ksdFnceDictDescContent': ET.tostring(item.find('ksdFnceDictDescContent'), encoding='unicode', method='html')
-                    }
-                    serializer = VocasSerializer(data=data)
-                    if serializer.is_valid(raise_exception=True):
-                        serializer.save()
-    
-    return JsonResponse({ "message": "save okay!" })
+                    fnceDictNm = item.find('fnceDictNm').text
+                    ksdFnceDictDescContent = ET.tostring(item.find('ksdFnceDictDescContent'), encoding='unicode', method='html')
+                    # Check if the record already exists
+                    if not Vocas.objects.filter(fnceDictNm=fnceDictNm).exists():
+                        data = {
+                            'fnceDictNm': fnceDictNm,
+                            'ksdFnceDictDescContent': ksdFnceDictDescContent
+                        }
+                        serializer = VocasSerializer(data=data)
+                        if serializer.is_valid(raise_exception=True):
+                            serializer.save()
+
+    return JsonResponse({"message": "save okay!"})
+
 
 def get_finance_vocas(request):
     vocas = Vocas.objects.all()  # 모든 Voca 객체를 가져옵니다.

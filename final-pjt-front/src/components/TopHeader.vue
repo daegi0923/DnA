@@ -24,6 +24,7 @@
   
   <style scoped>
   .top-header{
+
     display: flex;
     justify-content: space-between;
     background-color: #088082;
