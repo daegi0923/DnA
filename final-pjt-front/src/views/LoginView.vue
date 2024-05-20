@@ -1,10 +1,7 @@
 <template>
-    <div class="background-container">
-        <div class="login-container">
-            <Login/>
-        </div>
-
-    </div>
+<div class="background-container">
+  <Login/>    
+</div>
 </template>
 
 <script setup>
@@ -14,13 +11,6 @@ import Login from '@/components/Login.vue'
 <style scoped>
 *{
     box-sizing: border-box;
-}
-
-.login-container {
-  display: flex;
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  background-color: #f8f9fa; /* 배경색 (필요에 따라 변경 가능) */
 }
 
 .background-container {
