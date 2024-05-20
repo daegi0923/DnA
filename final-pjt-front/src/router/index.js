@@ -10,7 +10,6 @@ import DepositDetailView from '@/views/comparisonview/DepositDetailView.vue'
 import DepositView from '@/views/comparisonview/DepositView.vue'
 import SavingDetailView from '@/views/comparisonview/SavingDetailView.vue'
 import SavingView from '@/views/comparisonview/SavingView.vue'
-import PlanDetail from '@/views/savingplaner/PlanDetail.vue'
 import SavingPlanerView from '@/views/savingplaner/SavingPlanerView.vue'
 import ExchangeView from '@/views/ExchangeView.vue'
 import SearchBankView from '@/views/SearchBankView.vue'
@@ -71,9 +70,6 @@ const router = createRouter({
       path: '/plan',
       name: 'plan',
       component: SavingPlanerView,
-      children: [
-        {path: 'plan/:id', name: 'plandetail', component: PlanDetail},
-      ]
     },
     {
       path: '/login',

@@ -5,6 +5,8 @@
 <ArticleList />
 <CommunityPostList />
 <ExchangeCalculator />
+<FinanceWordList />
+
 <!-- <Footer /> -->
 </template>
 
@@ -16,6 +18,8 @@ import Footer from '@/components/Footer.vue'
 import Carousel from '@/components/mainpage/Carousel.vue'
 import ArticleList from '@/components/mainpage/ArticleList.vue'
 import CommunityPostList from '@/components/mainpage/CommunityPostList.vue'
+import FinanceWordList from '@/components/mainpage/FinanceWordList.vue'
+
 </script>
 
 <style scoped>

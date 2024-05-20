@@ -112,6 +112,21 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const vocaList = ref([])
+  const getVocaList = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/finance_vocabs/get_finance_vocas/`,
+    })
+     .then((response) => {
+        console.log(response.data);
+        vocaList.value = response.data
+      })
+     .catch((error) => {
+        console.log(error)
+      })
+    }
+
   const getDepositList = ()=>{
     axios({
       method: 'get',
@@ -153,6 +168,7 @@ export const useCounterStore = defineStore('counter', () => {
   }
   return { articles, API_URL, getBoardsList, signUp, logIn, token, isLogin, logOut
     , user_id, user_name, user_nickname, depositList, savingList, getDepositList,
-    getSavingList,  exchangeMoney, exchangeInfo, finCompanyList}
+    getSavingList,  exchangeMoney, exchangeInfo, finCompanyList, vocaList, getVocaList}
+
    
 }, { persist: true })
