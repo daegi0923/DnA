@@ -1,16 +1,13 @@
 <template>
-    <img src="@/assets/login.png" alt="background" class="background-image">
-    <div>
-      <v-sheet class="mx-auto" max-width="500">
-
-        <v-form @submit.prevent="signUp" class="login-form" >
-          <v-text-field label="username" v-model.trim="username"></v-text-field>
-          <v-text-field type="password" label="password1" v-model.trim="password1"></v-text-field>
-          <v-text-field type="password" label="password2" v-model.trim="password2"></v-text-field>
-          <v-btn type="submit">회원가입</v-btn>
-        </v-form>
-      </v-sheet>
-    </div>
+<img src="@/assets/login.png" alt="background">
+<v-sheet width="400" class="signupform">
+  <v-form @submit.prevent="signUp">
+    <v-text-field variant="solo-inverted" clearable label="username" v-model.trim="username"></v-text-field>
+    <v-text-field type="password" label="password1"variant="solo-inverted"  v-model.trim="password1"></v-text-field>
+    <v-text-field type="password" label="password2"variant="solo-inverted"  v-model.trim="password2"></v-text-field>
+    <v-btn type="submit" block>회원가입</v-btn>
+  </v-form>
+</v-sheet>
 </template>
 
 <script setup>
@@ -34,31 +31,16 @@ const signUp = function () {
 </script>
 
 <style>
-.background-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경을 반투명 검정색으로 설정 */
+*{
+  box-sizing: border-box;
 }
-.login-form {
-  width: 400px;
-  background: rgba(255, 255, 255, 0.8); /* 폼 배경을 반투명 흰색으로 설정 */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+.signupform{
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ec9d5c
 }
-.background-image {
-  position: absolute;
-  top: 40%; /* 배경 이미지의 위치를 살짝 위로 조정 */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
-  z-index: 1;
-  width: 650px;
-  opacity: 0.8; /* 이미지 반투명 설정 (필요시 조정) */
+img{
+  width: 500px;
+  margin-bottom: 0;
 }
-
 </style>

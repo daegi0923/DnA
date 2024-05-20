@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import ExchangeCalculator from '@/components/exchange/ExchangeCalculator..vue';
+import ExchangeCalculator from '@/components/exchange/ExchangeCalculator.vue';
 import { useCounterStore } from '@/stores/counter';
 import { onMounted } from 'vue';
 

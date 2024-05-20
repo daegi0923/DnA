@@ -1,15 +1,14 @@
 <template>
     <div>
-      <TopHeader v-if="showHeaderAndNav" />
       <NavBar v-if="showHeaderAndNav" />
       <router-view @route-change="updateVisibility"></router-view>
     </div>
   </template>
   
   <script setup>
+
   import { ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  import TopHeader from '@/components/TopHeader.vue';
   import NavBar from '@/components/NavBar.vue';
   
   const showHeaderAndNav = ref(true);
