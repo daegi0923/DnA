@@ -22,10 +22,17 @@ justify-content: center;
 background-color: #fff;
 width: 100%;
 font-size: 23px;
-height: 120px;
+height: 100px;
 padding: 10px 200px;
+border: 1px solid #088082;
+margin-bottom: 20px;
 }
-
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
 .link_line {
     text-decoration: none;
     color: black;

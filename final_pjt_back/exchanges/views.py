@@ -12,6 +12,11 @@ def index(request):
     else:
         search_data = now
 
+    if search_data.weekday() == 5:  # Saturday
+        search_data -= timedelta(days=1)
+    elif search_data.weekday() == 6:  # Sunday
+        search_data -= timedelta(days=2)
+
     search_data_str = search_data.strftime('%Y%m%d')
 
     params = {

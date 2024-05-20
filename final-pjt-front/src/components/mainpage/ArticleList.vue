@@ -1,16 +1,16 @@
 <template>
   <div class="news-container">
-    <h1>경제 뉴스 헤드라인</h1>
+    <h1 class="news-heading">경제 뉴스 헤드라인</h1>
     <ul class="news-list">
-      <li v-for="news in limitedNewsData" :key="news.title">
-        <div class="news-item">
-          <img :src="news.thumbnailUrl" :alt="news.title" class="news-thumbnail" />
-          <div class="news-content">
-            <h2 class="news-title">
-              <a :href="news.url" target="_blank">{{ news.title }}</a>
-            </h2>
-            <p class="news-source">{{ news.source }}</p>
-          </div>
+      <li v-for="news in limitedNewsData" :key="news.title" class="news-item">
+        <div class="news-thumbnail">
+          <img :src="news.thumbnailUrl" :alt="news.title" />
+        </div>
+        <div class="news-content">
+          <h2 class="news-title">
+            <a :href="news.url" target="_blank">{{ news.title }}</a>
+          </h2>
+          <p class="news-source">출처: {{ news.source }}</p>
         </div>
       </li>
     </ul>
@@ -55,18 +55,33 @@ onMounted(() => {
 });
 </script>
 
-<style>
-.news-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+<style scoped>
+.news-container {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.news-thumbnail {
+.news-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+}
+
+.news-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.news-thumbnail img {
   width: 100px;
-  height: 75px;
-  object-fit: cover;
-  margin-right: 1rem;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 20px;
 }
 
 .news-content {
@@ -74,13 +89,18 @@ onMounted(() => {
 }
 
 .news-title {
-  margin: 0;
-  font-size: 1rem;
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.news-title a {
+  text-decoration: none;
+  color: #333;
 }
 
 .news-source {
-  margin: 0.25rem 0 0;
-  font-size: 0.875rem;
+  font-size: 14px;
   color: #666;
+  margin: 0;
 }
 </style>

@@ -1,33 +1,35 @@
 <template>
-    <div>
-      <h2>환율 계산기</h2>
-      <div>
-        <label for="sendCountry">보내는 국가:</label>
-        <select id="sendCountry" v-model="selectedSendCountry">
-          <option v-for="exchange in exchangeStore.exchangeInfo" :key="exchange.cur_unit" :value="exchange">
-            {{ exchange.cur_nm }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <label for="amount">보내는 금액({{ selectedSendCountry ? selectedSendCountry.cur_unit : '' }}):</label>
-        <input id="amount" type="number" v-model.number="amount" />
-      </div>
-      <i @click="swapCountries" class="fa-solid fa-arrow-right-arrow-left"></i>
-      <div>
-        <label for="receiveCountry">받는 국가:</label>
-        <select id="receiveCountry" v-model="selectedReceiveCountry">
-          <option v-for="exchange in exchangeStore.exchangeInfo" :key="exchange.cur_unit" :value="exchange">
-            {{ exchange.cur_nm }}
-          </option>
-        </select>
-      </div>
-      <button @click="calculateConversion">환전 계산</button>
-      <p>환전 금액: {{ convertedAmount.toFixed(2) }}</p>
-      <div v-if="convertedAmount !== null">
-      </div>
+  <div class="exchange-calculator">
+    <h2>환율 계산기</h2>
+    <div class="country-selection">
+      <label for="sendCountry">보내는 국가 : </label>
+      <select id="sendCountry" v-model="selectedSendCountry">
+        <option v-for="exchange in exchangeStore.exchangeInfo" :key="exchange.cur_unit" :value="exchange">
+          {{ exchange.cur_nm }}
+        </option>
+      </select>
     </div>
-  </template>
+    <div class="amount-input">
+      <label for="amount">보내는 금액 {{ selectedSendCountry ? selectedSendCountry.cur_unit : '' }} : </label>
+      <input id="amount" type="number" v-model.number="amount" />
+    </div>
+    <div class="swap-icon" @click="swapCountries">
+      <i class="fas fa-exchange-alt"></i>
+    </div>
+    <div class="country-selection">
+      <label for="receiveCountry">받는 국가 : </label>
+      <select id="receiveCountry" v-model="selectedReceiveCountry">
+        <option v-for="exchange in exchangeStore.exchangeInfo" :key="exchange.cur_unit" :value="exchange">
+          {{ exchange.cur_nm }}
+        </option>
+      </select>
+    </div>
+    <button class="calculate-button" @click="calculateConversion">환전 계산</button>
+    <div class="conversion-result" v-if="convertedAmount !== null">
+      <p>환전 금액 : {{ convertedAmount.toFixed(2) }}</p>
+    </div>
+  </div>
+</template>
   
 <script setup>
 import { ref, computed } from 'vue';
@@ -75,3 +77,55 @@ const swapCountries = () => {
 };
 
 </script>
+
+<style scoped>
+.exchange-calculator {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.country-selection {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.swap-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.calculate-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.conversion-result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
+</style>
