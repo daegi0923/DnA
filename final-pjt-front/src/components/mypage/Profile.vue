@@ -44,17 +44,23 @@
           </li>
         </ul>
       </div>
+      <h3>금리 그래프</h3>
+      <Graph :userInfo="userInfo"></Graph>
     </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import { useProfileStore } from '@/stores/profile'
 import { useCounterStore } from '@/stores/counter'
 import { useRouter, useRoute } from 'vue-router'
+import Graph from '@/components/mypage/Graph.vue'
 
 const store = useCounterStore()
 const userInfo = ref({})
+const pStore = useProfileStore()
+
 const router = useRouter()
 const route = useRoute()
 const getUserInfo = () => {
@@ -65,7 +71,18 @@ const getUserInfo = () => {
   .then((res)=>{
     console.log(res.data);
     userInfo.value = res.data;
-  })
+    pStore.labels.value = []
+    pStore.basicRates.value = []
+    pStore.maxRates.value = []
+    console.log(Boolean(userInfo.value));
+    console.log(Boolean(userInfo.subscribed_deposits));
+    if (userInfo.value && userInfo.value.subscribed_deposits){
+      userInfo.value.subscribed_deposits.forEach(deposit => {
+        pStore.labels.value.push(deposit.product_info.fin_prdt_nm)
+        pStore.basicRates.value.push(deposit.intr_rate)
+        pStore.maxRates.value.push(deposit.intr_rate2)
+      })
+  }})
   .catch((err)=>{
     console.log(err);
   })
@@ -73,6 +90,9 @@ const getUserInfo = () => {
 
 onMounted(() => {
   getUserInfo()
+  console.log(pStore.labels.value);
+  console.log(pStore.basicRates.value);
+  console.log(pStore.maxRates.value);
 })
 </script>
 
