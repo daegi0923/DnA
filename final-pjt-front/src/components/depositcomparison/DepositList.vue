@@ -17,7 +17,7 @@
       <v-btn @click="filterCoName">검색</v-btn>
     </div>
 
-		<v-table v-if="result">
+		<v-table v-if="result.length">
      <thead>
        <tr>
         <!-- <th>item</th> -->
@@ -32,9 +32,9 @@
        <tr v-for="deposit in result" :key="deposit.id" @click="gotoDetail(deposit.id)">
          <td>{{ deposit.kor_co_nm }}</td>
          <td>{{ deposit.fin_prdt_nm }}</td>
-         <td>{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate }}</td>
-         <td>{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate2 }}</td>
-         <td>{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).save_trm }}</td>
+         <td v-if="savingTerm">{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate }}</td>
+         <td v-if="savingTerm">{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).intr_rate2 }}</td>
+         <td v-if="savingTerm">{{ deposit.depositoption_set.find(el=>el.save_trm === savingTerm).save_trm }}</td>
        </tr>
      </tbody>
    </v-table>

@@ -34,12 +34,12 @@ const router = createRouter({
       component: MainPageView,
     },
     {
-      path: '/mypage',
+      path: '/profile',
       name: 'mypage',
       component: MyPageView,
       children: [
-        {path: '/profile', name: 'profile', component: Profile},
-        {path: '/profile/update', name: 'updateUser', component: UpdateUser},
+        {path: ':username', name: 'profile', component: Profile},
+        {path: 'update', name: 'updateUser', component: UpdateUser},
       ]
     },
     {
