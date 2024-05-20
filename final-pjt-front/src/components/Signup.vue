@@ -1,22 +1,13 @@
 <template>
-  <div>
-    <h1>회원가입</h1>
-    <form @submit.prevent="signUp">
-      <div>
-        <label for="username">username : </label>
-        <input type="text" v-model.trim="username" id="username">
-      </div>
-      <div>
-        <label for="password1">password : </label>
-        <input type="password" v-model.trim="password1" id="password1">
-      </div>
-      <div>
-        <label for="password2">password confirmation : </label>
-        <input type="password" v-model.trim="password2" id="password2">
-      </div>
-      <input type="submit">
-    </form>
-  </div>
+<img src="@/assets/login.png" alt="background">
+<v-sheet width="400" class="signupform">
+  <v-form @submit.prevent="signUp">
+    <v-text-field variant="solo-inverted" clearable label="username" v-model.trim="username"></v-text-field>
+    <v-text-field type="password" label="password1"variant="solo-inverted"  v-model.trim="password1"></v-text-field>
+    <v-text-field type="password" label="password2"variant="solo-inverted"  v-model.trim="password2"></v-text-field>
+    <v-btn type="submit" block>회원가입</v-btn>
+  </v-form>
+</v-sheet>
 </template>
 
 <script setup>
@@ -40,5 +31,16 @@ const signUp = function () {
 </script>
 
 <style>
-
+*{
+  box-sizing: border-box;
+}
+.signupform{
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ec9d5c
+}
+img{
+  width: 500px;
+  margin-bottom: 0;
+}
 </style>
