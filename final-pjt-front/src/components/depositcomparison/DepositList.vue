@@ -16,7 +16,8 @@
       </v-select>
     </div>
 
-		<v-table v-if="result.length">
+		<v-data-table v-if="result.length"
+      hide-default-footer>
      <thead>
        <tr>
         <!-- <th>item</th> -->
@@ -36,7 +37,7 @@
          <td>{{ deposit.save_trm }}</td>
        </tr>
      </tbody>
-   </v-table>
+   </v-data-table>
 	</div>
 </template>
 
@@ -65,7 +66,6 @@ const gotoDetail = (depositId) => {
 const router = useRouter()
 onMounted(() => {
     store.getDepositList()
-    result.value = store.depositList
 })
 
 </script>

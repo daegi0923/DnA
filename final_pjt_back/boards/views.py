@@ -63,3 +63,12 @@ def delete_comment(request, comment_id):
     if request.method == 'DELETE':
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+@api_view(['PUT'])
+def update_views(request, board_id):
+    board = Board.objects.get(id=board_id)
+    if request.method == 'PUT':
+        board.views += 1
+        board.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)

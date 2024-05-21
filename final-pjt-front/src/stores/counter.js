@@ -12,7 +12,26 @@ export const useCounterStore = defineStore('counter', () => {
   const user_nickname = ref(null)
   const depositList = ref([])
   const savingList = ref([])
-  const finCompanyList = ref(['전체보기'])
+  const finCompanyList = ref(['전체보기', '우리은행',
+  '한국스탠다드차타드은행',
+  '대구은행',
+  '부산은행',
+  '광주은행',
+  '제주은행',
+  '전북은행',
+  '경남은행',
+  '중소기업은행',
+  '한국산업은행',
+  '국민은행',
+  '신한은행',
+  '농협은행',
+  'KEB하나은행',
+  '수협은행',
+  '주식회사 카카오뱅크',
+  '주식회사 케이뱅크',
+  '토스뱅크 주식회사',
+  '기타'
+  ])
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -92,6 +111,7 @@ export const useCounterStore = defineStore('counter', () => {
       user_id.value = null
       user_name.value = null
       user_nickname.value = null
+      router.push({ name: 'start' })
     })
     .catch((error) => {
       console.log(error);
@@ -134,15 +154,8 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/products/deposit-products/`,
     })
      .then((response) => {
-        console.log(response.data);
         depositList.value = response.data
-        console.log(finCompanyList);
-        depositList.value.forEach(element => {
-          if(finCompanyList.value.find(element.product_info.kor_co_name)===undefined){
-            finCompanyList.value.push(element.product_info.kor_co_name)
-          }
-
-        })
+        console.log(depositList.value)
       })
      .catch((error) => {
         console.log(error)
@@ -155,15 +168,7 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/products/saving-products/`,
     })
      .then((response) => {
-        // console.log(response.data);
         savingList.value = response.data
-        // console.log(savingList.value);
-        savingList.value.forEach(element => {
-          if(finCompanyList.value.findIndex(item => item === element.kor_co_nm) === -1){
-            finCompanyList.value.push(element.kor_co_nm)
-            // console.log(finCompanyList.value);
-          }
-        })
       })
      .catch((error) => {
         console.log(error)

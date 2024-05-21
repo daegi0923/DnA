@@ -20,6 +20,8 @@ import Profile from '@/components/mypage/Profile.vue'
 import UpdateUser from '@/components/mypage/UpdateUser.vue'
 
 
+import { useCounterStore } from '@/stores/counter'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -90,5 +92,20 @@ const router = createRouter({
     },
   ]
 })
+
+router.beforeEach((to, from) => {
+  const store = useCounterStore()
+  if (to.name === 'main' && !store.isLogin) {
+    window.alert('로그인이 필요합니다.')
+    return { name: 'login'}
+  }
+  if ((to.name === 'signup' || to.name === 'login') && (store.isLogin)){
+    window.alert('이미 로그인 했습니다.')
+    return { name: 'main' }
+  }
+})
+
+
+
 
 export default router
