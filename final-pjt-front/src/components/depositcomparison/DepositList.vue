@@ -14,7 +14,6 @@
       label="만기(개월)"
       :items="[1, 3, 6, 12, 24, 36]">
       </v-select>
-      <v-btn @click="filterCoName">검색</v-btn>
     </div>
 
 		<v-table v-if="result.length">

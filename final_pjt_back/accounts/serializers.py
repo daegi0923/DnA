@@ -24,7 +24,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'target_savings','annual_income',
-                  'primary_bank')
+                  'primary_bank', 'birthday', 'gender', 'address')
         read_only_fields = ('subscribed_deposits' ,'subscribed_savings')
 
 
