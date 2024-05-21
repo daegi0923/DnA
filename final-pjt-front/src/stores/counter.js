@@ -134,12 +134,12 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/products/deposit-products/`,
     })
      .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         depositList.value = response.data
         console.log(finCompanyList);
         depositList.value.forEach(element => {
-          if(finCompanyList.value.find(element.kor_co_name)===undefined){
-            finCompanyList.value.push(element.kor_co_name)
+          if(finCompanyList.value.find(element.product_info.kor_co_name)===undefined){
+            finCompanyList.value.push(element.product_info.kor_co_name)
           }
 
         })

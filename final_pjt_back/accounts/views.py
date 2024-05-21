@@ -29,3 +29,10 @@ def get_user_info(request, username):
     if request.method == 'GET':
         serializer = UserDetailSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['DELETE'])
+def delete_user(request):
+    user = request.user
+    if request.method == 'DELETE':
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

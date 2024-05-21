@@ -44,17 +44,27 @@
           </li>
         </ul>
       </div>
+      <h3>가입한 예금 상품</h3>
+      <Graph :productType="'deposit'"></Graph>
+      <hr>
+      <h3>가입한 적금 상품</h3>
+      <Graph :productType="'saving'"></Graph>
+
     </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import { useProfileStore } from '@/stores/profile'
 import { useCounterStore } from '@/stores/counter'
 import { useRouter, useRoute } from 'vue-router'
+import Graph from '@/components/mypage/Graph.vue'
 
 const store = useCounterStore()
 const userInfo = ref({})
+const pStore = useProfileStore()
+
 const router = useRouter()
 const route = useRoute()
 const getUserInfo = () => {
@@ -65,7 +75,27 @@ const getUserInfo = () => {
   .then((res)=>{
     console.log(res.data);
     userInfo.value = res.data;
-  })
+    pStore.depositsLabelList.value = [];
+    pStore.depositsBasicRateList.value = [];
+    pStore.depositsMaxRateList.value = [];
+    if (userInfo.value && userInfo.value.subscribed_deposits){
+      userInfo.value.subscribed_deposits.forEach(deposit => {
+        pStore.depositsLabelList.value.push(deposit.product_info.fin_prdt_nm)
+        pStore.depositsBasicRateList.value.push(deposit.intr_rate)
+        pStore.depositsMaxRateList.value.push(deposit.intr_rate2)
+      })
+    }
+    pStore.savingsLabelList.value = [];
+    pStore.savingsBasicRateList.value = [];
+    pStore.savingsMaxRateList.value = [];
+    if (userInfo.value && userInfo.value.subscribed_savings){
+      userInfo.value.subscribed_savings.forEach(saving => {
+        pStore.savingsLabelList.value.push(saving.product_info.fin_prdt_nm)
+        pStore.savingsBasicRateList.value.push(saving.intr_rate)
+        pStore.savingsMaxRateList?.value.push(saving.intr_rate2)
+      })
+    }
+})
   .catch((err)=>{
     console.log(err);
   })

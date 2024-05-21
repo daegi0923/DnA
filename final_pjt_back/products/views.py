@@ -40,8 +40,8 @@ def save_deposit_products(request):
 @api_view(["GET", "POST"])
 def deposit_products(request):
     if request.method == 'GET':
-        product_infos = DepositProduct.objects.all()
-        product_info_serializer = DepositProductSerializer(product_infos, many = True)
+        product_infos = DepositOption.objects.all()
+        product_info_serializer = DepositOptionSerializer(product_infos, many = True)
         # print(product_info_serializer)
         return Response(product_info_serializer.data, status = status.HTTP_200_OK)
     elif request.method == 'POST':
@@ -86,8 +86,8 @@ def save_saving_products(request):
 @api_view(["GET", "POST"])
 def saving_products(request):
     if request.method == 'GET':
-        product_infos = SavingProduct.objects.all()
-        product_info_serializer = SavingProductSerializer(product_infos, many = True)
+        product_infos = SavingOption.objects.all()
+        product_info_serializer = SavingOptionSerializer(product_infos, many = True)
         # print(product_info_serializer)
         return Response(product_info_serializer.data, status = status.HTTP_200_OK)
     elif request.method == 'POST':
