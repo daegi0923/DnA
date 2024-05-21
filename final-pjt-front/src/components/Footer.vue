@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <p>&#9400</p>
-    </div>
+<v-footer class="footer">
+    <img src="@/assets/Logo.png" alt="">
+    <p>Copyright &#9400 {{ new Date().getFullYear() }} All Rights Reserved. github : https://github.com/daegi0923 https://github.com/akeroroh</p>
+</v-footer>
 </template>
 
 <script setup>
@@ -9,5 +10,19 @@
 </script>
 
 <style scoped>
-
+.footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    background-color: #088082;
+    height: 70px
+}
+img{
+    width: 50px;
+    height: auto;
+    margin: 0 20px
+}
+p{
+    margin: 0
+}
 </style>

@@ -57,9 +57,12 @@ onMounted(() => {
 
 <style scoped>
 .news-container {
-  width: 800px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
+  overflow: hidden; /* 컨테이너를 벗어나는 내용을 숨기기 위해 추가 */
 }
 
 .news-heading {
@@ -86,11 +89,15 @@ onMounted(() => {
 
 .news-content {
   flex: 1;
+  overflow: hidden; /* 컨텐츠 영역에서 넘치는 텍스트를 숨기기 위해 추가 */
 }
 
 .news-title {
   font-size: 20px;
   margin: 0 0 10px;
+  white-space: nowrap; /* 한 줄로 표시하기 위해 추가 */
+  overflow: hidden; /* 넘치는 텍스트를 숨기기 위해 추가 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시하기 위해 추가 */
 }
 
 .news-title a {
@@ -102,5 +109,8 @@ onMounted(() => {
   font-size: 14px;
   color: #666;
   margin: 0;
+  white-space: nowrap; /* 한 줄로 표시하기 위해 추가 */
+  overflow: hidden; /* 넘치는 텍스트를 숨기기 위해 추가 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시하기 위해 추가 */
 }
 </style>

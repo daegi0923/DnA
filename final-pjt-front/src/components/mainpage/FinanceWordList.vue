@@ -44,12 +44,14 @@ onMounted(async () => {
 
 <style scoped>
 .finance-vocabulary {
+  height: 386.39px;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
+  overflow: hidden;
 }
 
 .vocabulary-heading {
@@ -60,6 +62,8 @@ onMounted(async () => {
 
 .vocabulary-content {
   text-align: center;
+  overflow: hidden;
+  padding: 10px;
 }
 
 .current-word {
@@ -71,5 +75,12 @@ onMounted(async () => {
 .current-description {
   font-size: 16px;
   line-height: 1.5;
+  text-overflow: ellipsis;
+  max-height: 180px; /* 원하는 최대 높이로 설정하세요 */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7; /* 최대 줄 수를 설정하세요 */
 }
+
 </style>

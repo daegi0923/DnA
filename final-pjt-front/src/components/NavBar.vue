@@ -43,7 +43,7 @@ const store = useCounterStore()
   height: 70px;
   padding: 10px; /* 간격 조정 */
   border: 1px solid #112D4E;
-
+  margin-bottom: 30px;
 }
 
 .logo {
