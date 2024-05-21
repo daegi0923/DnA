@@ -9,4 +9,5 @@ urlpatterns = [
     path('list/', views.read_board_list, name='list'),
     path('comment/<int:board_id>/', views.read_board_comment, name='comment'),
     path('comment/<int:comment_id>/delete/', views.delete_comment),
+    path('<int:board_id>/views/', views.update_views, name='update_views'),
 ]

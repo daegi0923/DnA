@@ -33,7 +33,7 @@ const logIn = function () {
 .loginform{
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid #ec9d5c
+  border: 2px solid #112D4E
 }
 img{
   width: 500px;

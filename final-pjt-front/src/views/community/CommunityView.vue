@@ -1,9 +1,7 @@
 <template>
-    <div>
+    <div class="container">
         <h1>게시판</h1>
-        <RouterLink to="/community/create">게시물 작성하기</RouterLink> | 
-        <RouterLink to="/community/list">게시글 목록</RouterLink>
-        <RouterView/>
+        <RouterView class='community-view'></RouterView>
     </div>
 </template>
 
@@ -11,16 +9,24 @@
 import CommunityCreateView from '@/views/community/CommunityCreateView.vue'
 import CommunityList from '@/components/community/CommunityList.vue'
 import { onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter'
 
 const store = useCounterStore()
 onMounted(() => {
   store.getBoardsList()
 })
-
+const router = useRouter()
 </script>
 
 <style scoped>
-
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 </style>

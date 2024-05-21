@@ -1,6 +1,6 @@
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
 
@@ -29,14 +29,14 @@ const vuetify = createVuetify({
 })
 
 const app = createApp(App)
+
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
-app.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
-library.add(fas) // Include needed solid icons
-library.add(far) // Include needed regular icons
-
 app.use(pinia)
 app.use(router)
 app.use(vuetify)
+app.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
+library.add(fas) // Include needed solid icons
+library.add(far) // Include needed regular icons
 
 app.mount('#app')

@@ -40,9 +40,9 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  border: 1px solid #ec9d5c;
+  border: 1px solid #112D4E;
   border-radius: 10px;
-  background-color: #ec9d5c;
+  background-color: #112D4E;
   color: white;
   width: 130px;
   text-decoration: none;

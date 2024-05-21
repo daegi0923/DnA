@@ -19,7 +19,8 @@
         :items="[1, 3, 6, 12, 24, 36]">
         </v-select>
     </div>
-		<v-data-table v-if="result">
+		<v-data-table v-if="result"
+      hide-default-footer>
       <thead>
       <tr>
         <!-- <th>item</th> -->
@@ -62,13 +63,19 @@ const savingType = ref('자유적립식')
 const savingTerm = ref(1)
 
 const result = computed(() => {
-  console.log(result);
-  if(finCoName.value === '전체보기'){
-    return store.savingList.filter(el=>el.save_trm === savingTerm.value).filter(el=>el.rsrv_type_nm === savingType.value)
-  }else{
-    return store.savingList.filter(el=>el.save_trm === savingTerm.value).filter(el=> el.product_info.kor_co_nm === finCoName.value).filter(el=>el.rsrv_type_nm === savingType.value)
+  if (finCoName.value === '전체보기') {
+
+    return store.savingList
+      .filter((el) => el.save_trm === savingTerm.value)
+      .filter((el) => el.rsrv_type_nm === savingType.value)
+  } else {
+    return store.savingList
+      .filter((el) => el.save_trm === savingTerm.value)
+      .filter((el) => el.product_info.kor_co_nm === finCoName.value)
+      .filter((el) => el.rsrv_type_nm === savingType.value)
   }
-})
+  
+});
 
 
 const gotoDetail = (savingId) => {
@@ -79,7 +86,7 @@ const gotoDetail = (savingId) => {
 
 onMounted(() => {
 		store.getSavingList()
-    console.log(store.depositList);
+    // console.log(store.depositList);
   })
 </script>
 
