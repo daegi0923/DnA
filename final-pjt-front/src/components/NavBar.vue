@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-container">
+  <div class="nav-container ">
     <RouterLink :to="{name: 'main'}" class="link_line logo-font">
       <img src="@/assets/LogoSymbol.png" alt="Logo" class="logo-img">
       <span class="mx-0">
@@ -43,7 +43,7 @@ const store = useCounterStore()
   height: 70px;
   padding: 10px; /* 간격 조정 */
   border: 1px solid #112D4E;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .logo {
@@ -52,8 +52,8 @@ const store = useCounterStore()
 }
 
 .logo-img {
-  width: 80px; /* 로고의 최대 너비를 설정 */
-  height: auto; /* 비율을 유지하면서 높이 자동 조정 */
+  width: auto; /* 로고의 최대 너비를 설정 */
+  height: 60px; /* 비율을 유지하면서 높이 자동 조정 */
 }
 .menu {
   display: flex;
