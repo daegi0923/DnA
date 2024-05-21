@@ -179,4 +179,6 @@ export const useCounterStore = defineStore('counter', () => {
     getSavingList,  exchangeMoney, exchangeInfo, finCompanyList, vocaList, getVocaList}
 
    
-}, { persist: true })
+}, { 
+  persist: {storage : sessionStorage}
+ })

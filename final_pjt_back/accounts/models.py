@@ -57,7 +57,7 @@ class User(AbstractUser):
     primary_bank = models.CharField(max_length=20, null=True, choices=BANK_CHOICES)  # 주 거래 은행
     subscribed_deposits = models.ManyToManyField(DepositOption, through='SubscribedDeposit')
     subscribed_savings = models.ManyToManyField(SavingOption, through='SubscribedSaving')
-    birthday = models.CharField(max_length=8, null=True, blank=True)
+    birthday = models.CharField(max_length=8,null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True)
     address = models.CharField(max_length=255, null=True, choices=PROVINCE_CHOICES)
 
