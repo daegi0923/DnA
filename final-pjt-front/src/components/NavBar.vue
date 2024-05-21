@@ -1,7 +1,7 @@
 <template>
     <div class="nav-container">
         <div class="row logo">
-            <img src="@/assets/Logosymbol.png" alt="Logo" class="logo-img">
+            <img src="@/assets/LogoSymbol.png" alt="Logo" class="logo-img">
         </div>
         <div class="menu">  
             <RouterLink :to="{name: 'main'}" class="link_line">Home</RouterLink> |
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <img src="@/assets/header.jpg" alt="">
+    <!-- <img src="@/assets/header.jpg" alt=""> -->
 
     </template>
     
@@ -42,6 +42,7 @@
         height: 70px;
         padding: 10px; /* 간격 조정 */
         border: 1px solid #088082;
+        margin-bottom: 30px;
 
     }
     
