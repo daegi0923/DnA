@@ -12,11 +12,10 @@
             <v-text-field v-model = "targetSavings" label="목표 저축 금액"
             placeholder=""  clearable></v-text-field>
           </v-col>
-          <!-- <v-col  cols = '12'>
-            <v-date-input label="Birthday" variant="outlined" v-model = "birthday" 
-            >
-            </v-date-input>
-          </v-col> -->
+          <v-col  cols = '12'>
+            <v-text-field v-model = "birthday" label="생년월일"
+            placeholder="생년월일 8자리"  clearable></v-text-field>
+          </v-col>
           <v-col cols = '12'>
             <v-text-field v-model = "annualIncome" label="연 수입"
             placeholder="" clearable></v-text-field>
@@ -93,7 +92,7 @@ const getUserInfo = () => {
     }
   })
   .then((res) => {
-    // console.log(res.data);
+    console.log(res.data);
     emailInput.value = res.data.email
     annualIncome.value = res.data.annual_income
     primaryBank.value = res.data.primary_bank
@@ -119,12 +118,13 @@ const updateUserInfo = () => {
       annual_income: annualIncome.value,
       primary_bank: primaryBank.value,
       target_savings: targetSavings.value,
-      // birthday: birthday.value,
+      birthday: birthday.value,
       address: address.value,
       gender: gender.value,
     }
   })
   .then(()=>{
+    console.log(birthday.value);
     console.log('update user info');
     console.log(route);
     router.push({name: 'profile', params: {id: store.username}})
@@ -152,6 +152,7 @@ const deleteUser = () => {
   })
 
 }
+
 onMounted(() => {
   getUserInfo()
 })

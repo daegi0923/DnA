@@ -29,7 +29,7 @@ def save_deposit_products(request):
             serializer.save()
             print('save success')
     for option in options:
-        # print(option)
+        print(option)
         serializer = DepositOptionSerializer(data = option)
         product = DepositProduct.objects.get(fin_prdt_cd = option.get('fin_prdt_cd'))
         if serializer.is_valid(raise_exception=True):
