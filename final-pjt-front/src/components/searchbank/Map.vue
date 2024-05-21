@@ -1,40 +1,77 @@
 <template>
-  <div>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control search-input" v-model="keyword" placeholder="장소를 검색하세요" @keyup.enter="searchPlaces">
-            <div class="input-group-append">
-              <button class="btn btn-primary search-button" type="button" @click="searchPlaces">검색</button>
-            </div>
-          </div>
-          <form @submit.prevent="clickPlaces">
-            <v-select v-model="province" :items="provinces" label="도/광역시/특별시"></v-select>
-            <v-select v-model="city" :items="cities[province]" label="시/군/구"></v-select>
-            <v-text-field v-model="bank" label="은행명"></v-text-field>      
-            <v-btn type="submit">검색</v-btn>
-          </form>
-        </div>
-      </div>
+      <div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <v-text-field
+        variant="outlined"
+        v-model="keyword"
+        label="키워드나 장소를 검색하세요"
+        append-inner-icon="mdi-magnify"
+        @click:append-inner="searchPlaces"
+        @keyup.enter="searchPlaces"
+        outlined
+        dense
+      ></v-text-field>
     </div>
-    <div id="map">
-      <div id="menu_wrap" class="container">
-        <ul class="list-group">
-          <li v-for="(place, index) in places" :key="index" class="list-group-item custom-list-item" :class="'marker_' + (index + 1)">
-            <span class="markerbg"></span>
-            <div class="info">
-              <h5>{{ place.place_name }}</h5>
-              <span>{{ place.road_address_name ? place.road_address_name : place.address_name }}</span>
-              <span class="tel">{{ place.phone }}</span>
-            </div>
-          </li>
-        </ul>
-      </div>   
+    <div class="col-md-6">
+      <form @submit.prevent="clickPlaces" class="d-flex">
+        <v-select
+          variant="outlined"
+          v-model="province"
+          :items="provinces"
+          label="도/광역시/특별시"
+          outlined
+          dense
+          class="mr-2"
+        ></v-select>
+        <v-select
+          variant="outlined"
+          v-model="city"
+          :items="cities[province]"
+          label="시/군/구"
+          outlined
+          dense
+          class="mr-2"
+        ></v-select>
+        <v-text-field
+          variant="outlined"
+          v-model="bank"
+          label="은행명"
+          dense
+          class="mr-2"
+        ></v-text-field>
+        <v-btn type="submit" color="primary" class="mt-2">검색</v-btn>
+      </form>
     </div>
   </div>
-  </template>
+</div>
+      <div id="map">
+        <div id="menu_wrap" class="container">
+          <v-list>
+            <v-list-item
+            v-for="(place, index) in places"
+            :key="index"
+            :class="'marker_' + (index + 1)"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-map-marker</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ place.place_name }}</v-list-item-title>
+              <v-list-item-subtitle>{{
+                place.road_address_name
+                  ? place.road_address_name
+                  : place.address_name
+              }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ place.phone }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </div>
+    </div>
+  </div>
+</template>
   
   <script>
 
@@ -299,10 +336,10 @@
 <style scoped>
 #map {
   width: 100%;
-  height: 800px;
-  max-height: 1000px;
+  height: 750px;
   position: relative;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .custom-list-item {
@@ -363,5 +400,10 @@
 
 #menu_wrap .option button {
   margin-left: 5px;
+}
+
+.map-form{
+  display: flex;
+  gap: 10px
 }
 </style>

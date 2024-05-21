@@ -21,9 +21,12 @@
   
   <style scoped>
   .community-article-list {
-    width: 800px;
-    margin: 0 auto;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
     padding: 20px;
+    height: 100%;
+    position: relative; /* 부모 요소를 상대적으로 설정 */
   }
   
   .list-heading {
@@ -32,13 +35,9 @@
   }
   
   .article-list-container {
-  position: relative; /* 부모 요소를 상대적으로 설정 */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  width: 800px;
-  height: 500px;
-}
+    width: 100%;
+    height: 100%; /* 부모 요소의 높이에 맞춤 */
+  }
   
   .article-list {
     list-style: none;
@@ -57,10 +56,10 @@
   }
   
   .load-more-link {
-  position: absolute; /* 절대적인 위치 설정 */
-  bottom: 10px; /* 하단 여백 설정 */
-  right: 10px; /* 우측 여백 설정 */
-}
+    position: absolute; /* 절대적인 위치 설정 */
+    bottom: 20px; /* 하단 여백 설정 */
+    right: 20px; /* 우측 여백 설정 */
+  }
   
   .load-more-button {
     padding: 10px 20px;
