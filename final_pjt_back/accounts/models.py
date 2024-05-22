@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from products.models import SavingOption, DepositOption
+from datetime import date
 
-
+age_range = [0, 20, 30, 40, 50, 60]
+annual_income_range = [0, 20000000, 40000000, 60000000, 80000000, 100000000]
+target_saving_range = [0, 20000000, 40000000, 60000000, 80000000, 100000000]
 
 class User(AbstractUser):
     GENDER_CHOICES = [
@@ -61,6 +64,42 @@ class User(AbstractUser):
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True)
     address = models.CharField(max_length=255, null=True, choices=PROVINCE_CHOICES)
 
+    @property 
+    def age(self):
+        today = date.today()
+        birthyear = int(self.birthday[:4])
+        age = today.year - birthyear
+        return age
+
+    @property
+    def age_group(self):
+        age = self.age
+        if age <= 20:
+            return '20세 이하'
+        elif age <= 29:
+            return '20대'
+        elif age <= 39:
+            return '30대'
+        elif age <= 49:
+            return '40대'
+        elif age <= 59:
+            return '50대'
+        else:
+            return '60세 이상'
+    @property
+    def income_range(self):
+        income_ranges = [0, 20000000, 40000000, 60000000, 80000000, 100000000]
+        for i, upper_bound in enumerate(income_ranges[1:], start=1):
+            if self.annual_income < upper_bound:
+                return f"{income_ranges[i-1]}원~{upper_bound}원"
+        return f"{income_ranges[-1]}원 이상"
+    @property
+    def saving_range(self):
+        saving_ranges = [0, 20000000, 40000000, 60000000, 80000000, 100000000]
+        for i, upper_bound in enumerate(saving_ranges[1:], start=1):
+            if self.target_saving < upper_bound:
+                return f"{saving_ranges[i-1]}원 ~ {upper_bound}원"
+        return f"{saving_ranges[-1]}원 이상"
 
 
 class SubscribedSaving(models.Model):

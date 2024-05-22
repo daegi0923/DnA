@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import SavingProduct, SavingOption, DepositProduct, DepositOption
 from django.contrib.auth import get_user_model
+from django.db.models import Count
 
 
 API_KEY = '8b4f8a3763090ac99ffff049e70b2e2c'
@@ -141,3 +142,62 @@ def subscribe_deposit(request, deposit_option_id):
         is_subscribed['is_subscribed'] = deposit_option in user.subscribed_deposits.all()
         return Response(is_subscribed, status=status.HTTP_200_OK)
 
+
+from django.db.models import Q, Count
+from datetime import date
+
+@api_view(['GET'])
+def recommend_products(request):
+    user = User.objects.get(id=request.user.id)
+
+    # 나이 계산
+    today = date.today()
+    birthyear = int(user.birthday[:4]) if user.birthday else 0
+    age = today.year - birthyear
+
+    # 나이대, 연봉 범위, 목표 저축 범위를 계산하는 함수
+    def get_range(value, ranges):
+        for i, upper_bound in enumerate(ranges[1:], start=1):
+            if value < upper_bound:
+                return (ranges[i-1], upper_bound)
+        return (ranges[-1], None)
+
+    age_range = get_range(age, [0, 20, 30, 40, 50, 60])
+    income_range = get_range(user.annual_income, [0,400000000, 600000000, 900000000, 1500000000])
+    saving_range = get_range(user.target_savings, [0,400000000, 600000000, 900000000, 1500000000])
+    age_start = today.year - age - 9
+    age_end = today.year - age
+
+    # 동일한 나이대, 연봉 범위, 목표 저축 범위에 속하는 User 필터링
+    user_group = User.objects.filter(
+        annual_income__range=income_range,
+        target_savings__range=saving_range
+    ).filter(
+        birthday__isnull=False
+    ).filter(
+        Q(birthday__startswith=str(age_end)) |
+        Q(birthday__startswith=str(age_start))
+    )
+
+    saving_options = SavingOption.objects.filter(
+        saving_subscribed__user__in=user_group
+    ).annotate(
+        subscribed_count=Count('saving_subscribed')
+    ).order_by('-subscribed_count')[:3]
+
+    deposit_options = DepositOption.objects.filter(
+        deposit_subscribed__user__in=user_group
+    ).annotate(
+        subscribed_count=Count('deposit_subscribed')
+    ).order_by('-subscribed_count')[:3]
+    print(SavingOption.objects.all())
+    print(SavingOptionSerializer(saving_options, many=True))
+    print(DepositOptionSerializer(deposit_options, many=True))
+    deposits = DepositOptionSerializer(deposit_options, many=True)
+    savings = SavingOptionSerializer(saving_options, many=True)
+    recommended_products_data = {
+            'recommended_savings': deposits.data, 
+            'recommended_deposits': savings.data,
+        }
+
+    return Response({'recommended_products': recommended_products_data})
