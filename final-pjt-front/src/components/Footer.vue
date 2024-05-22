@@ -12,9 +12,10 @@
 <style scoped>
 .footer{
     display: flex;
+    color: white;
     justify-content: center;
     margin-top: 40px;
-    background-color: #088082;
+    background-color: #DBE2EF;
     height: 70px
 }
 img{

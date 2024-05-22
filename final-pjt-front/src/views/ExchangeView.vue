@@ -1,10 +1,10 @@
 <template>
     <ExchangeCalculator />
-<div class="exchangelist">
+<div class="container">
     <h1>실시간 환율 정보</h1>
     <v-table>
         <thead>
-            <tr>
+            <tr :style="{ backgroundColor: '#294197', color: 'white' }">
                 <th>국가</th>
                 <th>송금받을때</th>
                 <th>송금보낼때</th>
@@ -39,7 +39,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.exchangelist {
-    margin: 68.5px
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px
+}
+h1{
+    margin: 10px
 }
 </style>
