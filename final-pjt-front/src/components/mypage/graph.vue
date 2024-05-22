@@ -29,29 +29,29 @@ const pStore = useProfileStore()
 const chartData = computed(() => {
   if(props.productType === 'deposit') {
     return {
-      labels: pStore.depositsLabelList.value,
+      labels: pStore.depositsLabelList,
       datasets: [
         { label: '기본 금리', 
-          data: pStore.depositsBasicRateList.value,
+          data: pStore.depositsBasicRateList,
           backgroundColor: '#088082',
         },
         { label: '최고 금리',
-         data: pStore.depositsMaxRateList.value,
+         data: pStore.depositsMaxRateList,
          backgroundColor: '#294197',
         }
       ]
     }
   } else if(props.productType === 'saving'){
     return {
-      labels: pStore.savingsLabelList.value,
+      labels: pStore.savingsLabelList,
       datasets: [
         { label: '기본 금리',
-          data: pStore.savingsBasicRateList.value,
+          data: pStore.savingsBasicRateList,
           backgroundColor: '#088082', 
         },
         { 
           label: '최고 금리',
-          data: pStore.savingsMaxRateList.value,
+          data: pStore.savingsMaxRateList,
           backgroundColor: '#294197', 
         }
       ]
@@ -75,7 +75,8 @@ const chartOptions = computed(() => (
   }
 ))
 onMounted(() => {
-  console.log(pStore.savingsMaxRateList)
+  pStore.getUserInfo()
+  console.log(pStore.depositsBasicRateList)
 })
 </script>
 <style>

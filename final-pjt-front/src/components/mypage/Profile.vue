@@ -6,7 +6,6 @@
         <div class="profile text-center" v-if="pStore.userInfo">
           <p class="useid">{{ pStore.userInfo.username }}</p>
           <p class="usemail">{{ pStore.userInfo.email }}</p>
-          <RouterLink :to="{name: 'UpdateUser', params:{username:store.username}}">회원 정보 수정</RouterLink>    
         </div>
       </div>
     </div>
@@ -35,6 +34,9 @@ const store = useCounterStore()
 const pStore = useProfileStore()
 const router = useRouter()
 const route = useRoute()
+onMounted(() => {
+  pStore.getUserInfo()
+})
 
 </script>
 
