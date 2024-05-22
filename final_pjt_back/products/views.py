@@ -191,9 +191,6 @@ def recommend_products(request):
     ).annotate(
         subscribed_count=Count('deposit_subscribed')
     ).order_by('-subscribed_count')[:3]
-    print(SavingOption.objects.all())
-    print(SavingOptionSerializer(saving_options, many=True))
-    print(DepositOptionSerializer(deposit_options, many=True))
     deposits = DepositOptionSerializer(deposit_options, many=True)
     savings = SavingOptionSerializer(saving_options, many=True)
     recommended_products_data = {
