@@ -15,7 +15,7 @@
     </div>
     <div class="right-header">
       <div v-if="!store.isLogin" class="link">
-        <RouterLink :to="{name:'signup'}" class="link">회원가입</RouterLink>  
+        <RouterLink :to="{name:'signup'}" class="link">회원가입</RouterLink>   
         <RouterLink :to="{name:'login'}" class="link">로그인</RouterLink>
       </div>
       <div v-else>

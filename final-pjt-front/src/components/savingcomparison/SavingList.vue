@@ -1,28 +1,35 @@
 <template>
 	<div>
-		<h1>SavingList</h1>
-		<!-- {{ store.depositList }} -->
     <div>
-        <h2>검색하기</h2>
-        <p>
-        </p>
-        <v-select v-model="finCoName"
-        label="금융 회사명"
-        :items="store.finCompanyList">
-        </v-select>
-        <v-select v-model="savingType"
-        label="적립 유형명"
-        :items="['자유적립식', '정액적립식']">
-        </v-select>
-        <v-select v-model="savingTerm"
-        label="만기(개월)"
-        :items="[1, 3, 6, 12, 24, 36]">
-        </v-select>
+      <v-row gutters class="align-center justify-center select-box">
+        <v-col cols="4">
+          <v-select v-model="finCoName"
+          label="금융 회사명"
+          :items="store.finCompanyList"
+          variant="solo-inverted">
+          </v-select>
+        </v-col>  
+        <v-col cols="4">
+          <v-select v-model="savingType"
+          label="적립 유형명"
+          :items="['자유적립식', '정액적립식']"
+          variant="solo-inverted">
+          </v-select>
+        </v-col>  
+        <v-col cols="4">
+          <v-select v-model="savingTerm"
+          label="만기(개월)"
+          :items="[1, 3, 6, 12, 24, 36]"
+          variant="solo-inverted">
+          </v-select>
+        </v-col>
+      </v-row>
     </div>
+    <p>* 상품 클릭시 상세페이지로 이동됩니다.</p>
 		<v-data-table v-if="result"
       hide-default-footer>
       <thead>
-      <tr>
+      <tr :style="{ backgroundColor: '#294197', color: 'white' }">
         <!-- <th>item</th> -->
         <th>은행</th>
         <th>상품 이름</th>
@@ -91,5 +98,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.select-box{
+  margin: 10px 0px 0px;
+}
 </style>

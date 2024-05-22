@@ -1,5 +1,5 @@
 <template>
-  <div class="container exchange-calculator">
+  <div class=" exchange-calculator">
     <h2 class="text-center my-4">환율 계산기</h2>
     <div class="row mb-4">
       <div class="col-md-6 d-flex align-items-center">
@@ -20,8 +20,8 @@
         </div>
       </div>
     </div>
-    <div class="text-center mb-4">
-      <button class="btn btn-primary rounded-pill" @click="swapCountries">
+    <div class="text-center mb-4" >
+      <button class="btn btn-primary rounded-pill" @click="swapCountries" :style="{ backgroundColor: '#294197', color: 'white' }">
         <i class="fas fa-exchange-alt"></i>
       </button>
     </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="text-center">
-      <button class="btn btn-lg btn-primary rounded-pill" @click="calculateConversion">환전 계산</button>
+      <button class="btn btn-lg btn-primary rounded-pill" @click="calculateConversion" :style="{ backgroundColor: '#294197', color: 'white' }">환전 계산</button>
     </div>
   </div>
 </template>
@@ -126,9 +126,10 @@ const swapCountries = () => {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .flag-img {

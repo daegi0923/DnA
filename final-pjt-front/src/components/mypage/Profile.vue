@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="profile_area">
           <div class="profile_inner d-flex flex-column align-items-center">
-            <img class="rounded-circle" src="C:\Users\User\Desktop\Study\Project_DnA\final-pjt-front\src\assets\default.png" width="84" height="84" alt="프로필 이미지">
+            <img class="rounded-circle" src="\src\assets\default.png" width="84" height="84" alt="프로필 이미지">
             <div class="profile text-center">
               <p class="useid">{{ userInfo.username }}</p>
               <p class="usemail">{{ userInfo.email }}</p>
