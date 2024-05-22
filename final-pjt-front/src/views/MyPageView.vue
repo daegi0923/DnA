@@ -1,94 +1,58 @@
 <template>
-<div class="d-flex">
-  <nav id="sidebarMenu" class="d-lg-block sidebar bg-white">
-    <div class="position-sticky">
-      <div class="profile_area">
+  <div class="d-flex">
+    <nav id="sidebarMenu" class="d-lg-block sidebar bg-white">
+      <div class="position-sticky">
+        <div class="profile_area">
           <div class="profile_inner d-flex flex-column align-items-center">
-            <img class="rounded-circle" src="\src\assets\default.png" width="84" height="84" alt="프로필 이미지">
+            <img class="rounded-circle" src="@/assets/default.png" width="84" height="84" alt="프로필 이미지">
             <div class="profile text-center" v-if="pStore.userInfo">
               <p class="useid">{{ pStore.userInfo.username }}</p>
               <p class="usemail">{{ pStore.userInfo.email }}</p>
             </div>
           </div>
         </div>
-      <div class="list-group list-group-flush mx-3 mt-4">
-          <li @click="goToProfile" class="list-group-item list-group-item-action active">내 프로필</li>
-          <li @click="goToFinance" class="list-group-item list-group-item-action">금융 프로필</li>
-          <li @click="goToPost" class="list-group-item list-group-item-action">내가 쓴 글</li>
-          <li @click="goToRecommend" class="list-group-item list-group-item-action">금융 상품 맞춤 추천</li>
-          <li @click="goToUpdate" class="list-group-item list-group-item-action">개인 정보 수정</li>
+        <ul class="list-group list-group-flush mx-3 mt-4">
+          <li
+            v-for="(item, index) in menuItems"
+            :key="index"
+            :class="['list-group-item', 'list-group-item-action', isCurrentRoute(item.route) ? 'active' : '']"
+            @click="navigateTo(item.route)"
+          >
+            {{ item.title }}
+          </li>
+        </ul>
       </div>
+    </nav>
+    <div class="container">
+      <RouterView />
     </div>
-  </nav>
-	<div class="container">
-		<RouterView></RouterView>
-	</div>
-</div>
+  </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import axios from 'axios'
+import { ref } from 'vue'
 import { useProfileStore } from '@/stores/profile'
-import { useCounterStore } from '@/stores/counter'
 import { useRouter, useRoute } from 'vue-router'
 
-const store = useCounterStore()
 const pStore = useProfileStore()
-
 const router = useRouter()
 const route = useRoute()
-const getUserInfo = () => {
-  axios({
-    method : 'get',
-        url : `${store.API_URL}/accounts/custom/user-detail/${route.params.username}/`,
-  })
-  .then((res)=>{
-    pStore.userInfo = res.data;
-    pStore.depositsLabelList.value = [];
-    pStore.depositsBasicRateList.value = [];
-    pStore.depositsMaxRateList.value = [];
-    if (res.data && res.data.subscribed_deposits){
-      console.log(res.data);
-      res.data.subscribed_deposits.forEach(deposit => {
-        pStore.depositsLabelList.value.push(deposit.product_info.fin_prdt_nm)
-        pStore.depositsBasicRateList.value.push(deposit.intr_rate)
-        pStore.depositsMaxRateList.value.push(deposit.intr_rate2)
-      })
-    }
-    pStore.savingsLabelList.value = [];
-    pStore.savingsBasicRateList.value = [];
-    pStore.savingsMaxRateList.value = [];
-    if (res.data && res.data.subscribed_savings){
-      res.data.subscribed_savings.forEach(saving => {
-        pStore.savingsLabelList.value.push(saving.product_info.fin_prdt_nm)
-        pStore.savingsBasicRateList.value.push(saving.intr_rate)
-        pStore.savingsMaxRateList?.value.push(saving.intr_rate2)
-      })
-    }
-})
-  .catch((err)=>{
-    console.log(err);
-  })
+
+const menuItems = ref([
+  { title: '내 프로필', route: { name: 'profile', params: { username: route.params.username } } },
+  { title: '금융 프로필', route: { name: 'Finance-profile', params: { username: route.params.username } } },
+  { title: '내가 쓴 글', route: { name: 'User-Posts', params: { username: route.params.username } } },
+  { title: '금융 상품 맞춤 추천', route: { name: 'Recommend', params: { username: route.params.username } } },
+  { title: '개인 정보 수정', route: { name: 'UpdateUser', params: { username: route.params.username } } },
+])
+
+const isCurrentRoute = (routeItem) => {
+  return route.name === routeItem.name && JSON.stringify(route.params) === JSON.stringify(routeItem.params)
 }
-const goToProfile = () =>{
-  router.push({name: "profile", params: {username: route.params.username}})
+
+const navigateTo = (routeItem) => {
+  router.push(routeItem)
 }
-const goToFinance = () =>{
-  router.push({name: "Finance-profile", params: {username: route.params.username}})
-}
-const goToPost = () =>{
-  router.push({name: "User-Posts", params: {username: route.params.username}})
-}
-const goToRecommend = () =>{
-  router.push({name: "Recommend", params: {username: route.params.username}})
-}
-const goToUpdate = () =>{
-  router.push({name: "UpdateUser", params: {username: route.params.username}})
-}
-onMounted(() => {
-  getUserInfo()
-})
 </script>
 
 <style scoped>
@@ -96,13 +60,13 @@ onMounted(() => {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Arial', sans-serif;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 400;
 }
+
 .sidebar {
   top: 0;
   bottom: 0;
@@ -113,5 +77,8 @@ onMounted(() => {
   z-index: 600;
 }
 
-
+.active {
+  background-color: #112D4E;
+  border:#112D4E;
+}
 </style>

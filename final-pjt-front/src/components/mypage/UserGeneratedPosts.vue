@@ -4,7 +4,7 @@
       <div class="card">
         <h3 class="card-header text-white card-title" >작성한 게시글 목록</h3>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" v-for="post in pStore.userInfo.board_set" :key="post.id">
+          <li class="list-group-item list-group-item-action" v-for="post in pStore.userInfo.board_set" :key="post.id">
             <router-link :to="`/community/${post.id}`">{{ post.title }}</router-link>
           </li>
         </ul>
@@ -14,7 +14,7 @@
       <div class="card">
         <h3 class="card-header text-white card-title" >작성한 댓글 목록</h3>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" v-for="comment in pStore.userInfo.comment_set" :key="comment.id">
+          <li class="list-group-item list-group-item-action" v-for="comment in pStore.userInfo.comment_set" :key="comment.id">
             <router-link :to="`/community/${comment.board.id}`">{{ comment.content }}</router-link>
           </li>
         </ul>
@@ -40,5 +40,9 @@ const route = useRoute()
 <style scoped>
 .card-title {
   background-color: #112D4E;
+}
+a {
+  color : black;
+  text-decoration-line : none;
 }
 </style> 

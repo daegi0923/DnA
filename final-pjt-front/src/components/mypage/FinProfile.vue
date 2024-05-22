@@ -16,7 +16,7 @@
               <h3 class="card-header text-white card-title ">가입한 예금 상품</h3>
               <div class="card-body">
                 <Graph :productType="'deposit'"></Graph>
-                <table class="table">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th>은행명</th>
@@ -28,10 +28,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="product in pStore.userInfo.subscribed_deposits" :key="product.id">
+                    <tr v-for="product in pStore.userInfo.subscribed_deposits" :key="product.id" @click="goToDepositInfo(product.product_info.id)">
                       <td>{{ product.product_info.kor_co_nm }}</td>
                       <td>
-                        <router-link :to="{name: 'depositDetail', params:{id: product.product_info.id}}">{{ product.product_info.fin_prdt_nm }}</router-link>
+                        {{ product.product_info.fin_prdt_nm }}
                       </td>
                       <td>{{ product.intr_rate }}</td>
                       <td>{{ product.intr_rate2 }}</td>
@@ -50,7 +50,7 @@
               <h3 class="card-header text-white card-title ">가입한 적금 상품</h3>
               <div class="card-body">
                 <Graph :productType="'saving'"></Graph>
-                <table class="table">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th>은행명</th>
@@ -62,11 +62,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="product in pStore.userInfo.subscribed_savings" :key="product.id">
+                    <tr v-for="product in pStore.userInfo.subscribed_savings" :key="product.id" @click="goToSavingInfo(product.product_info.id)">
                       <td>{{ product.product_info.kor_co_nm }}</td>
                       <td>
-                        <router-link :to="{name: 'depositDetail', params:{id: product.product_info.id}}">{{ product.product_info.fin_prdt_nm }}</router-link>
+                        {{ product.product_info.fin_prdt_nm }}
                       </td>
+                      <td>{{ product.intr_rate }}</td>
                       <td>{{ product.intr_rate2 }}</td>
                       <td>{{ product.intr_rate_type_nm }}</td>
                       <td>{{ product.save_trm }}</td>
@@ -88,9 +89,27 @@ import { useProfileStore } from '@/stores/profile'
 import { useCounterStore } from '@/stores/counter'
 import { useRouter, useRoute } from 'vue-router'
 import Graph from '@/components/mypage/Graph.vue'
-
+const router = useRouter()
 const pStore = useProfileStore()
-
+onMounted(()=> {
+  pStore.getUserInfo()
+})
+const goToDepositInfo = (product_id) => {
+    router.push({
+      name: 'depositDetail',
+      params: {
+        id: product_id
+      }
+    })
+  }
+  const goToSavingInfo = (product_id) => {
+    router.push({
+      name: 'savingDetail',
+      params: {
+        id: product_id
+      }
+    })
+  }
 </script>
 
 <style scoped>

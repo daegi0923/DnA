@@ -8,6 +8,7 @@ from .models import SavingProduct, SavingOption, DepositProduct, DepositOption
 from django.contrib.auth import get_user_model
 from django.db.models import Count
 from django.conf import settings
+from accounts.models import SubscribedDeposit, SubscribedSaving
 
 
 API_KEY = settings.PRODUCTS_API_KEY
@@ -179,23 +180,22 @@ def recommend_products(request):
         Q(birthday__startswith=str(age_end)) |
         Q(birthday__startswith=str(age_start))
     )
-
-    saving_options = SavingOption.objects.filter(
-        saving_subscribed__user__in=user_group
-    ).annotate(
-        subscribed_count=Count('saving_subscribed')
-    ).order_by('-subscribed_count')[:3]
-
-    deposit_options = DepositOption.objects.filter(
-        deposit_subscribed__user__in=user_group
-    ).annotate(
-        subscribed_count=Count('deposit_subscribed')
-    ).order_by('-subscribed_count')[:3]
-    deposits = DepositOptionSerializer(deposit_options, many=True)
-    savings = SavingOptionSerializer(saving_options, many=True)
+    # print(user_group)
+    saving_options = user_group.prefetch_related('subscribed_savings').product
+    print(saving_options) 
+    # deposit_options = SubscribedSaving.objects.filter(
+    #     deposit_subscribed__user__in=user_group
+    # ).annotate(
+    #     subscribed_count=Count('depositoption__deposit_subscribed')
+    # ).order_by('-subscribed_count')[:3]
+    # if len(deposit_options)==3 and len(saving_options)==3:
+    #     deposits = DepositProductSerializer(deposit_options, many=True)
+    #     savings = SavingProductSerializer(saving_options, many=True)
+    # print(SavingOption.objects.all().order_by('-intr_rate')[:3])
+    savings = SavingOptionSerializer(SavingOption.objects.all().order_by('-intr_rate')[:3], many=True)
+    deposits = DepositOptionSerializer(DepositOption.objects.all().order_by('-intr_rate')[:3], many=True)
     recommended_products_data = {
-            'recommended_savings': deposits.data, 
-            'recommended_deposits': savings.data,
+            'recommended_savings': savings.data, 
+            'recommended_deposits': deposits.data,
         }
-
     return Response({'recommended_products': recommended_products_data})
