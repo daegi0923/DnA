@@ -41,7 +41,7 @@
           dense
           class="mr-2"
         ></v-text-field>
-        <v-btn type="submit" color="primary" class="mt-2">검색</v-btn>
+        <v-btn type="submit" color="primary" class="mt-2"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></v-btn>
       </form>
     </div>
   </div>
@@ -340,6 +340,9 @@
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
 .custom-list-item {

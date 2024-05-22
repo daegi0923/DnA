@@ -19,7 +19,7 @@
       </tbody>
     </table>
     <div class="board-nav">
-      <v-btn @click="goToList" class ="btn-nav">목록</v-btn>
+      <v-btn @click="goToList" class ="btn-nav listbtn">목록</v-btn>
       <nav aria-label="..." >
         <ul class="pagination">
           <li :class="['page-item', currentPage === 1 ? 'disabled' : '']">
@@ -34,7 +34,7 @@
           </li>
         </ul>
       </nav>
-      <v-btn @click="goToCreate" v-if="store.isLogin" class ="btn-nav">글쓰기</v-btn>
+      <v-btn @click="goToCreate" v-if="store.isLogin" class ="btn-nav"><font-awesome-icon :icon="['fas', 'pen-nib']" /></v-btn>
     </div>
   </div>
 </template>
@@ -116,21 +116,26 @@ const goToCreate = () => {
 </script>
 <style scoped>
 .container {
-  max-width: 800px;
+  max-width: 100%px;
+    font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
 }
 .board-nav {
   display:flex;
   justify-content: space-between;
 }
 .btn-nav {
-  background-color: #294197;
+  background-color: #3F72AF;
   color: white;
-  border-color:#294197;
+  border-color:#3F72AF;
 }
 .btn-not-selected {
   background-color: white;
-  color : #294197;
+  color : #3F72AF;
 
+}
+.listbtn{
+  visibility: hidden;
 }
 
 </style>
