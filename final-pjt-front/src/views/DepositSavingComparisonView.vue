@@ -52,6 +52,8 @@ const toggleButton = (buttonType) => {
 .container {
 	max-width: 1100px;
     margin: 0 auto;
+	font-family: "Nanum Gothic Coding", monospace;
+  	font-weight: 400;
 }
 .text-center {
   text-align: center;

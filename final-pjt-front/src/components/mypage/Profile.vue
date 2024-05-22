@@ -192,5 +192,6 @@ onMounted(() => {
 <style scoped>
 .card-title {
   background-color: #112D4E;
+  
 }
 </style> 

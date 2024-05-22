@@ -7,7 +7,7 @@
             <RouterLink :to="{ name: 'community-detail', params: { id: board.id }}" class="article-link">{{ board.title }}</RouterLink>
           </li>
         </ul>
-        <RouterLink :to="{ name: 'community' }" class="load-more-link">
+        <RouterLink :to="{ name: 'community-list' }" class="load-more-link">
           <button class="load-more-button">더 보기</button>
         </RouterLink>
       </div>
@@ -22,7 +22,7 @@
   <style scoped>
   .community-article-list {
     width: 100%;
-    border: 1px solid black;
+    box-shadow: 0 2px 8px #DBE2EF;
     border-radius: 5px;
     padding: 20px;
     height: 100%;
@@ -32,6 +32,8 @@
   .list-heading {
     font-size: 24px;
     margin-bottom: 20px;
+    font-family: "Nanum Gothic Coding", monospace;
+    font-weight: 800;
   }
   
   .article-list-container {
@@ -53,6 +55,8 @@
     color: #333;
     font-weight: bold;
     font-size: 18px;
+    font-family: "Nanum Gothic Coding", monospace;
+    font-weight: 400;
   }
   
   .load-more-link {
@@ -63,7 +67,7 @@
   
   .load-more-button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #3F72AF;
     color: white;
     border: none;
     border-radius: 5px;
@@ -72,7 +76,7 @@
   }
   
   .load-more-button:hover {
-    background-color: #0056b3;
+    background-color: #3F72AF;
   }
   </style>
   

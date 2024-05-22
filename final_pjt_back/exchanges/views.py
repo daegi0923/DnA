@@ -3,6 +3,7 @@ from .models import ExchangeRate
 from django.http import JsonResponse
 from .serializers import ExchangeRateSerializer
 from datetime import datetime, timedelta
+from django.conf import settings
 
 now = datetime.now()
 BASE_URL = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON'
@@ -20,7 +21,7 @@ def index(request):
     search_data_str = search_data.strftime('%Y%m%d')
 
     params = {
-        'authkey': '1vdtuLiU3mNqNTMqu3VhqpXIEfb9HgCx',
+        'authkey': settings.EXCHANGE_API_KEY,
         'searchdate': search_data_str,
         'data': 'AP01'
     }
@@ -32,7 +33,7 @@ def index(request):
 def save_exchanges(request):
     url = BASE_URL
     params = {
-        'authkey': '1vdtuLiU3mNqNTMqu3VhqpXIEfb9HgCx',
+        'authkey': settings.EXCHANGE_API_KEY,
         'data': 'AP01'
     }
     response = requests.get(url, params=params).json()

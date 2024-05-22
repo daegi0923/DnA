@@ -154,3 +154,17 @@ REST_FRAMEWORK = {
 }
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+import environ
+import os
+
+env = environ.Env(DEBUG=(bool, True))
+
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
+
+EXCHANGE_API_KEY = env('EXCHANGE_API_KEY')
+PRODUCTS_API_KEY = env('PRODUCTS_API_KEY')
+VOCA_API_KEY = env('VOCA_API_KEY')
+DEBUG = env('DEBUG')

@@ -43,14 +43,16 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+*{
+  box-sizing: content-box;
+}
 .finance-vocabulary {
-  height: 386.39px;
+  height: 347px;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px #DBE2EF;
   border-radius: 5px;
-  background-color: #f9f9f9;
   overflow: hidden;
 }
 
@@ -58,6 +60,8 @@ onMounted(async () => {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 800;
 }
 
 .vocabulary-content {

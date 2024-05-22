@@ -81,13 +81,15 @@ const switchMethod = () => {
 
 <style scoped>
 .create-update-view {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   font-family: 'Arial', sans-serif;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
 }
 
 .title {
