@@ -12,4 +12,5 @@ urlpatterns = [
     path('saving-product-options/<int:saving_product_id>/', views.saving_product_options, name= 'saving_product_options'),
     path('subscribe-saving/<int:saving_option_id>/', views.subscribe_saving, ),
     path('subscribe-deposit/<int:deposit_option_id>/', views.subscribe_deposit, ),
+    path('recommend/', views.recommend_products, ),
 ]

@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="profile_area">
           <div class="profile_inner d-flex flex-column align-items-center">
-            <img class="rounded-circle" src="C:\Users\User\Desktop\Study\Project_DnA\final-pjt-front\src\assets\default.png" width="84" height="84" alt="프로필 이미지">
+            <img class="rounded-circle" src="\src\assets\default.png" width="84" height="84" alt="프로필 이미지">
             <div class="profile text-center">
               <p class="useid">{{ userInfo.username }}</p>
               <p class="usemail">{{ userInfo.email }}</p>
@@ -37,6 +37,77 @@
             </div>
           </div>
 
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="card">
+              <h3 class="card-header text-white card-title ">가입한 예금 상품</h3>
+              <div class="card-body">
+                <Graph :productType="'deposit'"></Graph>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>은행명</th>
+                      <th>상품명</th>
+                      <th>기본 금리</th>
+                      <th>최고 금리</th>
+                      <th>금리 유형</th>
+                      <th>저축 기간</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="product in userInfo.subscribed_deposits" :key="product.id">
+                      <td>{{ product.product_info.kor_co_nm }}</td>
+                      <td>
+                        <router-link :to="{name: 'depositDetail', params:{id: product.product_info.id}}">{{ product.product_info.fin_prdt_nm }}</router-link>
+                      </td>
+                      <td>{{ product.intr_rate }}</td>
+                      <td>{{ product.intr_rate2 }}</td>
+                      <td>{{ product.intr_rate_type_nm }}</td>
+                      <td>{{ product.save_trm }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="col-12">
+            <div class="card">
+              <h3 class="card-header text-white card-title ">가입한 적금 상품</h3>
+              <div class="card-body">
+                <Graph :productType="'saving'"></Graph>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>은행명</th>
+                      <th>상품명</th>
+                      <th>기본 금리</th>
+                      <th>최고 금리</th>
+                      <th>금리 유형</th>
+                      <th>저축 기간</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="product in userInfo.subscribed_savings" :key="product.id">
+                      <td>{{ product.product_info.kor_co_nm }}</td>
+                      <td>
+                        <router-link :to="{name: 'depositDetail', params:{id: product.product_info.id}}">{{ product.product_info.fin_prdt_nm }}</router-link>
+                      </td>
+                      <td>{{ product.intr_rate2 }}</td>
+                      <td>{{ product.intr_rate_type_nm }}</td>
+                      <td>{{ product.save_trm }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+
           <div class="col-12">
             <div class="card">
               <h3 class="card-header text-white card-title" >작성한 게시글 목록</h3>
@@ -61,89 +132,6 @@
             </div>
           </div>
 
-
-          <div class="col-12">
-            <div class="card">
-              <h3 class="card-header text-white card-title" >가입한 정기 예금 상품 목록</h3>
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>상품명</th>
-                      <th>기본 금리</th>
-                      <th>최고 금리</th>
-                      <th>금리 유형</th>
-                      <th>저축 기간</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="product in userInfo.subscribed_deposits" :key="product.id">
-                      <td>
-                        <router-link :to="{name: 'depositDetail', params:{id: product.product_info.id}}">{{ product.product_info.fin_prdt_nm }}</router-link>
-                      </td>
-                      <td>{{ product.intr_rate }}</td>
-                      <td>{{ product.intr_rate2 }}</td>
-                      <td>{{ product.intr_rate_type_nm }}</td>
-                      <td>{{ product.save_trm }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-12">
-            <div class="card">
-              <h3 class="card-header text-white card-title" >가입한 적금 상품 목록</h3>
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>상품명</th>
-                      <th>기본 금리</th>
-                      <th>최고 금리</th>
-                      <th>금리 유형</th>
-                      <th>저축 기간</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="product in userInfo.subscribed_savings" :key="product.id">
-                      <td>
-                        <router-link :to="{name: 'depositDetail', params:{id: product.product_info.id}}">{{ product.product_info.fin_prdt_nm }}</router-link>
-                      </td>
-                      <td>{{ product.intr_rate }}</td>
-                      <td>{{ product.intr_rate2 }}</td>
-                      <td>{{ product.intr_rate_type_nm }}</td>
-                      <td>{{ product.save_trm }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-12">
-            <div class="card">
-              <h3 class="card-header text-white card-title ">가입한 예금 상품</h3>
-              <div class="card-body">
-                <Graph :productType="'deposit'"></Graph>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="card">
-              <h3 class="card-header text-white card-title ">가입한 적금 상품</h3>
-              <div class="card-body">
-                <Graph :productType="'saving'"></Graph>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
