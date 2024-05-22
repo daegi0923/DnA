@@ -1,7 +1,5 @@
 <template>
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
-  {{ pStore.depositsLabelList}}
-
+  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" class="graph"/>
 </template>
 
 <script setup>
@@ -80,3 +78,9 @@ onMounted(() => {
   console.log(pStore.savingsMaxRateList)
 })
 </script>
+<style>
+.graph{
+font-family: "Nanum Gothic Coding", monospace;
+font-weight: 400;
+}
+</style>

@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="text-center mb-4" >
-      <button class="btn btn-primary rounded-pill" @click="swapCountries" :style="{ backgroundColor: '#294197', color: 'white' }">
+      <button class="btn btn-primary rounded-pill" @click="swapCountries" :style="{ backgroundColor: '#3F72AF', color: 'white' }">
         <i class="fas fa-exchange-alt"></i>
       </button>
     </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="text-center">
-      <button class="btn btn-lg btn-primary rounded-pill" @click="calculateConversion" :style="{ backgroundColor: '#294197', color: 'white' }">환전 계산</button>
+      <button class="btn btn-lg btn-primary rounded-pill" @click="calculateConversion" :style="{ backgroundColor: '#3F72AF', color: 'white' }"><font-awesome-icon :icon="['fas', 'calculator']" /></button>
     </div>
   </div>
 </template>
@@ -123,13 +123,15 @@ const swapCountries = () => {
 
 <style scoped>
 .exchange-calculator {
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ffffff;
   border-radius: 5px;
   background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px #DBE2EF;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
 }
 
 .flag-img {
@@ -139,5 +141,9 @@ const swapCountries = () => {
 
 .bi-arrow-left-right {
   font-size: 24px;
+}
+h2{
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 800;
 }
 </style>

@@ -5,11 +5,12 @@ import xml.etree.ElementTree as ET
 from .serializers import VocasSerializer
 from .models import Vocas
 import re
+from django.conf import settings
 
 # Create your views here.
 
 BASE_URL = 'http://api.seibro.or.kr/openapi/service/FnTermSvc/getFinancialTermMeaning'
-API_KEY = 'ClEl7z/9nNW/g0NNpuJsf6wBBPJV5UWiVxKC6SzME5GsWrUpQ85zpxv1aJY4Ockw3+m03/eCIYyg60sfOqIOxg=='
+API_KEY = settings.VOCA_API_KEY
 
 def index(request):
     params = {

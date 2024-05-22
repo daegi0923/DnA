@@ -21,12 +21,17 @@ const router = useRouter()
 
 <style scoped>
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   font-family: 'Arial', sans-serif;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+h1{
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 800;
+  margin-bottom: 20px;
 }
 </style>

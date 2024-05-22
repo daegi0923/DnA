@@ -10,7 +10,7 @@
     </div>
     <div class="chat-input">
       <input type="text" v-model="userInput" placeholder="메시지를 입력해보세요(예시. 1년안에 5천만원을 모으고 싶어요)" @keyup.enter="sendMessage">
-      <button @click="sendMessage">보내기</button>
+      <button @click="sendMessage"><font-awesome-icon :icon="['far', 'paper-plane']" /></button>
     </div>
   </div>
 </template>

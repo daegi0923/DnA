@@ -7,9 +7,10 @@ from rest_framework import status
 from .models import SavingProduct, SavingOption, DepositProduct, DepositOption
 from django.contrib.auth import get_user_model
 from django.db.models import Count
+from django.conf import settings
 
 
-API_KEY = '8b4f8a3763090ac99ffff049e70b2e2c'
+API_KEY = settings.PRODUCTS_API_KEY
 
 # Create your views here.
 User = get_user_model()

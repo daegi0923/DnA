@@ -4,7 +4,8 @@
     <ul class="news-list">
       <li v-for="news in limitedNewsData" :key="news.title" class="news-item">
         <div class="news-thumbnail">
-          <img :src="news.thumbnailUrl" :alt="news.title" />
+          <img v-if="news.thumbnailUrl" :src="news.thumbnailUrl" :alt="news.title" />
+          <img v-else src="@/assets/noimage.png" alt="">
         </div>
         <div class="news-content">
           <h2 class="news-title">
@@ -57,17 +58,21 @@ onMounted(() => {
 
 <style scoped>
 .news-container {
-  border: 1px solid black;
+  box-shadow: 0 2px 8px #DBE2EF;
   border-radius: 5px;
   width: 100%;
   margin: 0 auto;
   padding: 20px;
   overflow: hidden; /* 컨테이너를 벗어나는 내용을 숨기기 위해 추가 */
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 500;
 }
 
 .news-heading {
   font-size: 24px;
   margin-bottom: 20px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 800;
 }
 
 .news-list {
@@ -98,11 +103,14 @@ onMounted(() => {
   white-space: nowrap; /* 한 줄로 표시하기 위해 추가 */
   overflow: hidden; /* 넘치는 텍스트를 숨기기 위해 추가 */
   text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시하기 위해 추가 */
+  font-family: "Nanum Gothic Coding", monospace;
 }
 
 .news-title a {
   text-decoration: none;
   color: #333;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 500;
 }
 
 .news-source {
@@ -112,5 +120,6 @@ onMounted(() => {
   white-space: nowrap; /* 한 줄로 표시하기 위해 추가 */
   overflow: hidden; /* 넘치는 텍스트를 숨기기 위해 추가 */
   text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시하기 위해 추가 */
+  
 }
 </style>
