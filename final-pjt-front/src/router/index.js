@@ -18,6 +18,9 @@ import CommunityCreateView from '@/views/community/CommunityCreateView.vue'
 import CommunityListView from '@/views/community/CommunityListView.vue'
 import Profile from '@/components/mypage/Profile.vue'
 import UpdateUser from '@/components/mypage/UpdateUser.vue'
+import FinProfile from '@/components/mypage/FinProfile.vue'
+import Recommend from '@/components/mypage/Recommend.vue'
+import UserGeneratedPosts from '@/components/mypage/UserGeneratedPosts.vue'
 
 
 import { useCounterStore } from '@/stores/counter'
@@ -41,7 +44,10 @@ const router = createRouter({
       component: MyPageView,
       children: [
         {path: ':username', name: 'profile', component: Profile},
-        {path: ':username/update', name: 'updateUser', component: UpdateUser},
+        {path: ':username/finance', name: 'Finance-profile', component: FinProfile},
+        {path: ':username/update', name: 'UpdateUser', component: UpdateUser},
+        {path: ':username/recommend', name: 'Recommend', component: Recommend},
+        {path: ':username/posts', name: 'User-Posts', component: UserGeneratedPosts},
       ]
     },
     {

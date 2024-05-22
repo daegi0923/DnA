@@ -1,5 +1,7 @@
 <template>
   <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  {{ pStore.depositsLabelList}}
+
 </template>
 
 <script setup>

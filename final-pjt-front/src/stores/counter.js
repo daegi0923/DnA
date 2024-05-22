@@ -12,7 +12,8 @@ export const useCounterStore = defineStore('counter', () => {
   const user_nickname = ref(null)
   const depositList = ref([])
   const savingList = ref([])
-  const finCompanyList = ref(['전체보기', '우리은행',
+  const finCompanyList = ref(['전체보기', 
+  '우리은행',
   '한국스탠다드차타드은행',
   '대구은행',
   '부산은행',

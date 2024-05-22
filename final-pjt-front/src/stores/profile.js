@@ -12,8 +12,12 @@ export const useProfileStore = defineStore('profile', () => {
   const savingsLabelList = ref([])
   const savingsBasicRateList = ref([])
   const savingsMaxRateList = ref([])
-
+  const userInfo = ref(null)
+  const recommendSavingList = ref([])
+  const recommendDepositList = ref([])
+  
   return { depositsLabelList, 
     depositsBasicRateList, depositsMaxRateList, 
-    savingsLabelList, savingsBasicRateList, savingsMaxRateList }
-})
+    savingsLabelList, savingsBasicRateList, savingsMaxRateList, userInfo,
+     recommendSavingList, recommendDepositList }
+}, {persist: true})
