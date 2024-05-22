@@ -78,10 +78,9 @@ onMounted(() => {
   console.log(pStore.savingsMaxRateList)
 })
 </script>
-
 <style>
 .graph{
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 400;
+font-family: "Nanum Gothic Coding", monospace;
+font-weight: 400;
 }
 </style>
