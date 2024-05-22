@@ -88,7 +88,7 @@
         city: "",
         bank: "",
         provinces: [
-        '전체',
+          '전체',
         '서울특별시',
         '인천광역시',
         '대전광역시',
@@ -139,9 +139,10 @@
     methods: {
 
       loadScript() {
+        const API_KEY = import.meta.env.VITE_API_KEY;
         const script = document.createElement("script");
         script.src =
-          "//dapi.kakao.com/v2/maps/sdk.js?appkey=fb46c88703e2ee3761ca6cee1048de3c&libraries=services&autoload=false";
+          `//dapi.kakao.com/v2/maps/sdk.js?appkey=${API_KEY}&libraries=services&autoload=false`;
         script.onload = () => window.kakao.maps.load(() => this.loadMap());
         document.head.appendChild(script);
       },
