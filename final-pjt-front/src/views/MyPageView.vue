@@ -5,8 +5,7 @@
       <div class="profile_area">
           <div class="profile_inner d-flex flex-column align-items-center">
             <img class="rounded-circle" src="\src\assets\default.png" width="84" height="84" alt="프로필 이미지">
-            <div class="profile text-center">
-
+            <div class="profile text-center" v-if="pStore.userInfo">
               <p class="useid">{{ pStore.userInfo.username }}</p>
               <p class="usemail">{{ pStore.userInfo.email }}</p>
             </div>
