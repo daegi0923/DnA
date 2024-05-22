@@ -1,10 +1,27 @@
 <template>
   <div class="carousel-container">
-    <v-carousel class="carousel">
-      <v-carousel-item src="1.jpg" cover></v-carousel-item>
-      <v-carousel-item src="2.jpg" cover></v-carousel-item>
-      <v-carousel-item src="3.jpg" cover></v-carousel-item>
-    </v-carousel>
+    <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/carousel/001.png" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="/carousel/002.png" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
   </div>
 </template>
 
@@ -13,12 +30,16 @@
 
 <style scoped>
 .carousel-container {
+  box-shadow: 0 2px 8px #DBE2EF;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* 전체 화면 높이로 설정 */
+  height: 936px; /* Viewport height to center vertically */
+  background-color: #f8f9fa; /* Optional: background color */
 }
 
 .carousel {
+  width: 100%; /* Adjust width as needed */
 }
 </style>
