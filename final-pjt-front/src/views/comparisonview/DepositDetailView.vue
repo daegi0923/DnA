@@ -1,8 +1,13 @@
 <template>
     <div class="container">
         <div v-if="product">
-          <h3>{{ product.kor_co_nm }}</h3>
-          <h1>{{ product.fin_prdt_nm }}</h1>
+          <div class="product-header">
+            <img :src="getLogoUrl(product.kor_co_nm)" alt="product.kor_co_nm" class="bankimg rounded-circle me-3">
+            <div class="product-info">
+              <h3>{{ product.kor_co_nm }}</h3>
+              <h1>{{ product.fin_prdt_nm }}</h1>
+            </div>
+          </div>
           <br>
           <div class="row">
             <div class="info">
@@ -49,6 +54,30 @@ const route = useRoute()
 const router = useRouter()
 const product = ref(null)
 const isSubscribedList = ref({})
+const getLogoUrl = (bankName) => {
+  const bankCodes = {
+    '경남은행': '/bank/경남은행.png',
+    '광주은행': '/bank/광주은행.png',
+    '국민은행': '/bank/국민은행.png',
+    '농협은행주식회사': '/bank/농협은행.jfif',
+    '대구은행': '/bank/대구은행.jfif',
+    '부산은행': '/bank/부산은행.png',
+    '수협은행': '/bank/수협은행.png',
+    '신한은행': '/bank/신한은행.png',
+    '우리은행': '/bank/우리은행.jfif',
+    '전북은행': '/bank/전북은행.png',
+    '제주은행': '/bank/제주은행.png',
+    '중소기업은행': '/bank/중소기업은행.png',
+    '주식회사 카카오뱅크': '/bank/카카오뱅크.png',
+    '주식회사 케이뱅크': '/bank/케이뱅크.jfif',
+    '토스뱅크 주식회사': '/bank/토스.jfif',
+    'KEB하나은행': '/bank/하나은행.png',
+    '한국산업은행': '/bank/한국산업은행.jfif',
+    '한국스탠다드차타드은행': '/bank/한국스탠다드차타드은행.png'
+  };
+  return bankCodes[bankName] || '';
+};
+
 const loadProduct = () => {
   axios({
   method: 'get',
@@ -177,5 +206,22 @@ onMounted(() => {
   padding: 5px;
   width: 80px;
   font-weight: bold;
+}
+.product-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.product-info h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.product-info h1 {
+  margin: 0;
+  font-size: 2em;
+}
+.bankimg{
+  width: 100px;
 }
 </style>
