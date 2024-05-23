@@ -6,10 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import SavingProduct, SavingOption, DepositProduct, DepositOption
 from django.contrib.auth import get_user_model
-from django.db.models import Count
+from django.db.models import Count, OuterRef, Subquery
 from django.conf import settings
 from accounts.models import SubscribedDeposit, SubscribedSaving
-
+from django.db.models import Subquery
 
 API_KEY = settings.PRODUCTS_API_KEY
 
@@ -164,9 +164,9 @@ def recommend_products(request):
                 return (ranges[i-1], upper_bound)
         return (ranges[-1], None)
 
-    age_range = get_range(age, [0, 20, 30, 40, 50, 60])
-    income_range = get_range(user.annual_income, [0,400000000, 600000000, 900000000, 1500000000])
-    saving_range = get_range(user.target_savings, [0,400000000, 600000000, 900000000, 1500000000])
+    age_range = get_range(age, [0, 20, 40, 60])
+    income_range = get_range(user.annual_income, [0,4000000000, 6000000000, 9000000000, 1500000000])
+    saving_range = get_range(user.target_savings, [0,4000000000, 6000000000, 9000000000, 1500000000])
     age_start = today.year - age - 9
     age_end = today.year - age
 
@@ -180,22 +180,46 @@ def recommend_products(request):
         Q(birthday__startswith=str(age_end)) |
         Q(birthday__startswith=str(age_start))
     )
-    # print(user_group)
-    saving_options = user_group.prefetch_related('subscribed_savings').product
-    print(saving_options) 
-    # deposit_options = SubscribedSaving.objects.filter(
-    #     deposit_subscribed__user__in=user_group
-    # ).annotate(
-    #     subscribed_count=Count('depositoption__deposit_subscribed')
-    # ).order_by('-subscribed_count')[:3]
-    # if len(deposit_options)==3 and len(saving_options)==3:
-    #     deposits = DepositProductSerializer(deposit_options, many=True)
-    #     savings = SavingProductSerializer(saving_options, many=True)
-    # print(SavingOption.objects.all().order_by('-intr_rate')[:3])
-    savings = SavingOptionSerializer(SavingOption.objects.all().order_by('-intr_rate')[:3], many=True)
-    deposits = DepositOptionSerializer(DepositOption.objects.all().order_by('-intr_rate')[:3], many=True)
+    print(len(user_group))
+    subscribed_savings = SubscribedSaving.objects.filter(
+        user__in=user_group
+    ).values('saving_option')
+
+    subscribed_savings_count = subscribed_savings.annotate(
+        subscribed_count=Count('saving_option')
+    ).values('saving_option', 'subscribed_count')
+
+    top_saving_products = SavingProduct.objects.annotate(
+        subscribed_count=Subquery(
+            subscribed_savings_count.filter(
+                saving_option=OuterRef('savingoption__id')
+            ).values('subscribed_count')[:1]
+        )
+    ).order_by('-subscribed_count')[:3]
+
+    subscribed_deposits = SubscribedDeposit.objects.filter(
+        user__in=user_group
+    ).values('deposit_option')
+
+    subscribed_deposits_count = subscribed_deposits.annotate(
+        subscribed_count=Count('deposit_option')
+    ).values('deposit_option', 'subscribed_count')
+
+    top_deposit_products = DepositProduct.objects.annotate(
+        subscribed_count=Subquery(
+            subscribed_deposits_count.filter(
+                deposit_option=OuterRef('depositoption__id')
+            ).values('subscribed_count')[:1]
+        )
+    ).order_by('-subscribed_count')[:3]
+    for product in top_saving_products:
+        print(f"Saving Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
+
+    for product in top_deposit_products:
+        print(f"Deposit Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
+
     recommended_products_data = {
-            'recommended_savings': savings.data, 
-            'recommended_deposits': deposits.data,
+            'recommended_savings': SavingProductSerializer(top_saving_products, many=True).data,
+            'recommended_deposits': DepositProductSerializer(top_deposit_products, many=True).data,
         }
     return Response({'recommended_products': recommended_products_data})
