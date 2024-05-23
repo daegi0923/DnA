@@ -13,7 +13,6 @@
       </v-col>
     </v-row>
   </v-container>
-  <Footer />
 </template>
 
 <script setup>
@@ -22,7 +21,6 @@ import Carousel from '@/components/mainpage/Carousel.vue'
 import ArticleList from '@/components/mainpage/ArticleList.vue'
 import CommunityPostList from '@/components/mainpage/CommunityPostList.vue'
 import FinanceWordList from '@/components/mainpage/FinanceWordList.vue'
-import Footer from '@/components/Footer.vue'
 
 const components = [
   ArticleList,

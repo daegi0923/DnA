@@ -13,10 +13,13 @@
       <button @click="sendMessage"><font-awesome-icon :icon="['far', 'paper-plane']" /></button>
     </div>
   </div>
+  <Loading v-if="loading" />
 </template>
 
 <script>
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+import Loading from '@/components/Loading.vue'
+import { ref } from 'vue'
 
 export default {
   data() {
@@ -24,6 +27,7 @@ export default {
       userInput: '',
       conversationHistory: [],
       chatSession: null,
+      loading: false
     };
   },
   methods: {
@@ -74,10 +78,12 @@ export default {
     },
     async sendMessage() {
       if (!this.userInput) return;
-
+      
       if (!this.chatSession) {
         await this.startChatSession();
       }
+      
+      this.loading = true
 
       const response = await this.chatSession.sendMessage(this.userInput);
       const responseText = await response.response.text();
@@ -98,6 +104,7 @@ export default {
         text: formattedText,
       });
       
+      this.loading = false;
     },
   },
   mounted() {
