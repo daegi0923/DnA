@@ -39,4 +39,4 @@ class BoardSerializer(serializers.ModelSerializer):
         read_only_fields = ('user', 'created_at', 'updated_at')
     user = UserSerializer(read_only=True)
     comment_set = CommentSerializer(many=True, read_only=True)
-    comment_count = serializers.IntegerField(source='comments.count', read_only=True)
+    comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
