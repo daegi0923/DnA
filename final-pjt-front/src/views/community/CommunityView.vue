@@ -1,8 +1,11 @@
 <template>
+  <div class="community-container">
     <div class="container">
         <h1>게시판</h1>
         <RouterView class='community-view'></RouterView>
     </div>
+
+  </div>
 </template>
 
 <script setup>
@@ -28,6 +31,9 @@ const router = useRouter()
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.community-container{
+  min-height: 735px
 }
 h1{
   font-family: "Nanum Gothic Coding", monospace;

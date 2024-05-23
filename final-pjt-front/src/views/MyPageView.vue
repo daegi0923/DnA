@@ -1,30 +1,32 @@
 <template>
-  <div class="d-flex">
-    <nav id="sidebarMenu" class="d-lg-block sidebar bg-white">
-      <div class="position-sticky">
-        <div class="profile_area">
-          <div class="profile_inner d-flex flex-column align-items-center">
-            <img class="rounded-circle" src="@/assets/default.png" width="84" height="84" alt="프로필 이미지">
-            <div class="profile text-center" v-if="pStore.userInfo">
-              <p class="useid">{{ pStore.userInfo.username }}</p>
-              <p class="usemail">{{ pStore.userInfo.email }}</p>
+  <div class="mypage-container">
+    <div class="d-flex">
+      <nav id="sidebarMenu" class="d-lg-block sidebar bg-white">
+        <div class="position-sticky">
+          <div class="profile_area">
+            <div class="profile_inner d-flex flex-column align-items-center">
+              <img class="rounded-circle" src="@/assets/default.png" width="84" height="84" alt="프로필 이미지">
+              <div class="profile text-center" v-if="pStore.userInfo">
+                <p class="useid">{{ pStore.userInfo.username }}</p>
+                <p class="usemail">{{ pStore.userInfo.email }}</p>
+              </div>
             </div>
           </div>
+          <ul class="list-group list-group-flush mx-3 mt-4">
+            <li
+              v-for="(item, index) in menuItems"
+              :key="index"
+              :class="['list-group-item', 'list-group-item-action', isCurrentRoute(item.route) ? 'active' : '']"
+              @click="navigateTo(item.route)"
+            >
+              {{ item.title }}
+            </li>
+          </ul>
         </div>
-        <ul class="list-group list-group-flush mx-3 mt-4">
-          <li
-            v-for="(item, index) in menuItems"
-            :key="index"
-            :class="['list-group-item', 'list-group-item-action', isCurrentRoute(item.route) ? 'active' : '']"
-            @click="navigateTo(item.route)"
-          >
-            {{ item.title }}
-          </li>
-        </ul>
+      </nav>
+      <div class="container">
+        <RouterView />
       </div>
-    </nav>
-    <div class="container">
-      <RouterView />
     </div>
   </div>
 </template>
@@ -57,7 +59,7 @@ const navigateTo = (routeItem) => {
 
 <style scoped>
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background-color: white;
@@ -68,17 +70,22 @@ const navigateTo = (routeItem) => {
 }
 
 .sidebar {
-  top: 0;
-  bottom: 0;
-  left: 30px;
+  top: 70px;
+  bottom: 61px;
+  left: 50px; /* Adjust the left margin here */
   padding: 58px 0 0; /* Height of navbar */
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-  width: 240px;
+  width: 300px;
   z-index: 600;
+  position: fixed;
 }
 
 .active {
   background-color: #112D4E;
   border:#112D4E;
+}
+
+.mypage-container{
+  min-height: 735px;
 }
 </style>

@@ -2,6 +2,7 @@
   <v-app>
     <NavBar v-if="showHeaderAndNav" />
     <router-view @route-change="updateVisibility"></router-view>
+    <Footer v-if="showHeaderAndNav" />
   </v-app>
 </template>
 
@@ -10,6 +11,7 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import NavBar from '@/components/NavBar.vue';
+import Footer from '@/components/Footer.vue';
 
 const showHeaderAndNav = ref(true);
 const route = useRoute();
