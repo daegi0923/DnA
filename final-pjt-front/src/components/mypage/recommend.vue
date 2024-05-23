@@ -6,10 +6,13 @@
         <h3 class="text-center mb-3">정기 예금</h3>
         <div class="d-flex flex-wrap justify-content-center">
           <div class="m-2 flip-card" v-for="(deposit, index) in pStore.recommendDepositList" :key="index">
-            <div class="flip-card-inner" @click="goToDepositInfo(deposit.product_info.id)">
+            <div class="flip-card-inner" @click="goToDepositInfo(deposit.id)">
               <div class=" flip-card-front">
-                <h4 class="">{{ deposit.product_info.fin_prdt_nm }}</h4>
-                <p class="">{{ deposit.product_info.kor_co_nm }}</p>
+                <div class="mb-3">
+                  <img :src="getLogoUrl(deposit.kor_co_nm)" alt="deposit.kor_co_nm" class="bankimg rounded-circle">
+                </div>
+                <h5 class="">{{ deposit.fin_prdt_nm }}</h5>
+                <p class="">{{ deposit.kor_co_nm }}</p>
               </div>
               <div class=" flip-card-back">
                 <h4 class="">상품정보 보러가기</h4>
@@ -22,10 +25,13 @@
         <h3 class="text-center mb-3">적금</h3>
         <div class="d-flex flex-wrap justify-content-center">
           <div class="m-2 flip-card" v-for="(saving, index) in pStore.recommendSavingList" :key="index">
-            <div class="flip-card-inner" @click="goToSavingInfo(saving.product_info.id)">
+            <div class="flip-card-inner" @click="goToSavingInfo(saving.id)">
               <div class=" flip-card-front">
-                <h4 class="">{{ saving.product_info.fin_prdt_nm }}</h4>
-                <p class="">{{ saving.product_info.kor_co_nm }}</p>
+                <div class="mb-3">
+                  <img :src="getLogoUrl(saving.kor_co_nm)" alt="saving.kor_co_nm" class="bankimg rounded-circle">
+                </div>
+                <h5 class="">{{ saving.fin_prdt_nm }}</h5>
+                <p class="">{{ saving.kor_co_nm }}</p>
               </div>
               <div class=" flip-card-back">
                 <h4>
@@ -84,6 +90,29 @@ const goToSavingInfo = (product_id) => {
     }
   })
 }
+const getLogoUrl = (bankName) => {
+  const bankCodes = {
+    '경남은행': '/bank/경남은행.png',
+    '광주은행': '/bank/광주은행.png',
+    '국민은행': '/bank/국민은행.png',
+    '농협은행주식회사': '/bank/농협은행.jfif',
+    '대구은행': '/bank/대구은행.jfif',
+    '부산은행': '/bank/부산은행.png',
+    '수협은행': '/bank/수협은행.png',
+    '신한은행': '/bank/신한은행.png',
+    '우리은행': '/bank/우리은행.jfif',
+    '전북은행': '/bank/전북은행.png',
+    '제주은행': '/bank/제주은행.png',
+    '중소기업은행': '/bank/중소기업은행.png',
+    '주식회사 카카오뱅크': '/bank/카카오뱅크.png',
+    '주식회사 케이뱅크': '/bank/케이뱅크.jfif',
+    '토스뱅크 주식회사': '/bank/토스.jfif',
+    'KEB하나은행': '/bank/하나은행.png',
+    '한국산업은행': '/bank/한국산업은행.jfif',
+    '한국스탠다드차타드은행': '/bank/한국스탠다드차타드은행.png'
+  };
+  return bankCodes[bankName] || '';
+};
 
 
 onMounted(() => {
@@ -155,6 +184,10 @@ onMounted(() => {
   transform: rotateY(180deg);
   justify-content: center;
 
+}
+.bankimg{
+  width: 90px;
+  margin-right : 0px;
 }
 
 </style>
