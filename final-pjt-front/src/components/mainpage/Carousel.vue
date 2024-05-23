@@ -1,10 +1,5 @@
 <template>
-  <div class="carousel-container">
-    <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    </div>
-    <div id="carouselExample" class="carousel slide">
+  <div id="carouselExample" class="carousel-container carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="/carousel/001.png" class="d-block w-100" alt="...">
@@ -12,6 +7,7 @@
       <div class="carousel-item">
         <img src="/carousel/002.png" class="d-block w-100" alt="...">
       </div>
+      <!-- 추가 이미지들을 여기에 넣을 수 있습니다 -->
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -21,7 +17,6 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
   </div>
 </template>
 
@@ -35,7 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 936px; /* Viewport height to center vertically */
+  height: 957px; /* Viewport height to center vertically */
   background-color: #f8f9fa; /* Optional: background color */
 }
 

@@ -1,6 +1,7 @@
 <template>
     <div class="community-article-list">
       <h1 class="list-heading">커뮤니티 글 목록</h1>
+      <hr>
       <div class="article-list-container">
         <ul class="article-list">
           <li v-for="board in store.articles.slice(0, 10)" :key="board.id" class="article-item">

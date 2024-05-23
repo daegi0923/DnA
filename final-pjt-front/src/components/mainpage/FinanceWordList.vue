@@ -1,9 +1,10 @@
 <template>
     <div class="finance-vocabulary">
       <h1 class="vocabulary-heading">금융 단어장</h1>
+      <hr>
       <div class="vocabulary-content">
         <p class="current-word">{{ currentWord }}</p>
-        <p class="current-description">{{ currentDiscription }}</p>
+        <div class="current-description" v-html="currentDiscription"></div>
       </div>
     </div>
   </template>
@@ -15,21 +16,20 @@ const store = useCounterStore()
 const currentWord = ref('');
 const currentDiscription = ref('')
 
+const stripHtmlTags = (html) => {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
 
 const updateWord = () => {
     // 현재 단어와 설명이 비어 있는 경우에만 값을 업데이트
     const index = Math.floor(Math.random() * store.vocaList.length);
     currentWord.value = store.vocaList[index].fnceDictNm;
     const description = store.vocaList[index].ksdFnceDictDescContent;
-    
-    // Remove only HTML tags, not content inside <ksdFnceDictDescContent>
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = description;
-    const contentInsideTags = tempElement.querySelector('ksdFnceDictDescContent').innerHTML;
-        
-    // Remove HTML tags and entities from the content inside <ksdFnceDictDescContent>
-    const processedContent = contentInsideTags.replace(/&nbsp;/g, '').replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<[^>]+>/g, '').replace(/&[^;]+;/g, '').replace(/p/, '')
-    currentDiscription.value = processedContent;
+    const plainText = stripHtmlTags(description);
+    console.log(currentDiscription.value);
+    currentDiscription.value = plainText;
 }
 
 // updateWord 함수를 최초에 한 번 호출하여 페이지 로드 시에도 단어가 표시되도록 함
