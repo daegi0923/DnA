@@ -5,7 +5,8 @@ import { useRouter } from 'vue-router'
 
 export const useCounterStore = defineStore('counter', () => {
   const articles = ref([])
-  const API_URL = 'http://127.0.0.1:8000'
+
+  const API_URL = 'http://54.206.86.165:8000'
   const token = ref(null)
   const user_id = ref(null)
   const user_name = ref(null)
