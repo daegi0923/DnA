@@ -1,6 +1,7 @@
 <template>
   <div class="news-container">
     <h1 class="news-heading">경제 뉴스 헤드라인</h1>
+    <hr>
     <ul class="news-list">
       <li v-for="news in limitedNewsData" :key="news.title" class="news-item">
         <div class="news-thumbnail">
