@@ -6,10 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import SavingProduct, SavingOption, DepositProduct, DepositOption
 from django.contrib.auth import get_user_model
-from django.db.models import Count, OuterRef, Subquery
+from django.db.models import Count, OuterRef, Subquery, Max
 from django.conf import settings
 from accounts.models import SubscribedDeposit, SubscribedSaving
-from django.db.models import Subquery
 
 API_KEY = settings.PRODUCTS_API_KEY
 
@@ -30,7 +29,7 @@ def save_deposit_products(request):
         # print(baseinfo)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            print('save success')
+    print('save success')
     for option in options:
         print(option)
         serializer = DepositOptionSerializer(data = option)
@@ -73,7 +72,7 @@ def save_saving_products(request):
     options = data.get('optionList')
     # print(options)
     for baseinfo in baseinfos:
-        print(baseinfo)
+        # print(baseinfo)
         serializer = SavingProductSerializer(data = baseinfo)
         if serializer.is_valid():
             serializer.save()
@@ -148,9 +147,28 @@ def subscribe_deposit(request, deposit_option_id):
 from django.db.models import Q, Count
 from datetime import date
 
+def get_top_products_by_max_interest_rate(product_model, option_model, n=3):
+   max_interest_rates = option_model.objects.values('product')
+   max_interest_rates = max_interest_rates.annotate(max_rate=Max('intr_rate2', 'intr_rate'))
+   max_interest_rates = max_interest_rates.values('product', 'max_rate')
+
+   top_products = product_model.objects.annotate(
+       max_interest_rate=Subquery(
+           max_interest_rates.filter(
+               product=OuterRef('pk')
+           ).values('max_rate')[:1]
+       )
+   ).order_by('-max_interest_rate')[:n]
+
+   return top_products
+
 @api_view(['GET'])
 def recommend_products(request):
     user = User.objects.get(id=request.user.id)
+    if not user.birthday or not user.annual_income or not user.target_savings:
+        top_saving_products = get_top_products_by_max_interest_rate(SavingProduct, SavingOption)
+        top_deposit_products = get_top_products_by_max_interest_rate(DepositProduct, DepositOption)
+        return Response({"recommended_savings" : SavingProductSerializer(top_saving_products, many=True).data, "recommended_deposits" : DepositProductSerializer(top_deposit_products, many=True).data}, status=status.HTTP_200_OK)
 
     # 나이 계산
     today = date.today()
@@ -165,8 +183,8 @@ def recommend_products(request):
         return (ranges[-1], None)
 
     age_range = get_range(age, [0, 20, 40, 60])
-    income_range = get_range(user.annual_income, [0,4000000000, 6000000000, 9000000000, 1500000000])
-    saving_range = get_range(user.target_savings, [0,4000000000, 6000000000, 9000000000, 1500000000])
+    income_range = get_range(user.annual_income, [0,40000000, 70000000 , 100000000])
+    saving_range = get_range(user.target_savings, [0,200000000, 300000000, 400000000])
     age_start = today.year - age - 9
     age_end = today.year - age
 
@@ -212,11 +230,11 @@ def recommend_products(request):
             ).values('subscribed_count')[:1]
         )
     ).order_by('-subscribed_count')[:3]
-    for product in top_saving_products:
-        print(f"Saving Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
+    # for product in top_saving_products:
+    #     print(f"Saving Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
 
-    for product in top_deposit_products:
-        print(f"Deposit Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
+    # for product in top_deposit_products:
+    #     print(f"Deposit Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
 
     recommended_products_data = {
             'recommended_savings': SavingProductSerializer(top_saving_products, many=True).data,

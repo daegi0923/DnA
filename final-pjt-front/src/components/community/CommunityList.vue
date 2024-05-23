@@ -11,7 +11,7 @@
       <tbody>
         <tr v-for="item in paginatedData" :key="item.id" @click="goToDetail(item)">
           <td>{{ item.id }}</td>
-          <td>{{ item.title }}</td>
+          <td>{{ item.title }}<span v-if="item.comment_count>0"> [{{ item.comment_count }}]</span></td>
           <td>{{ item.username }}</td>
           <td>{{ formatDate(item.created_at) }}</td>
           <td>{{ item.views }}</td>
@@ -64,6 +64,7 @@ const resultData = computed(() =>
       title: el.title,
       username: el.user.username,
       views: el.views,
+      comment_count: el.comment_count,
       created_at: el.created_at, // Keep original date format here
     }))
     .sort((a, b) => b.id - a.id)

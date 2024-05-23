@@ -69,8 +69,8 @@ const getRecommend = () => {
   })
   .then((res) => {
     console.log(res.data)
-    pStore.recommendSavingList = res.data.recommended_products.recommended_savings
-    pStore.recommendDepositList = res.data.recommended_products.recommended_deposits
+    pStore.recommendSavingList = res.data.recommended_savings
+    pStore.recommendDepositList = res.data.recommended_deposits
   })
 }
 
