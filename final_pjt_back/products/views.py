@@ -236,8 +236,7 @@ def recommend_products(request):
     # for product in top_deposit_products:
     #     print(f"Deposit Product: {product.fin_prdt_nm}, Subscribed Count: {product.subscribed_count}")
 
-    recommended_products_data = {
+    return Response({
             'recommended_savings': SavingProductSerializer(top_saving_products, many=True).data,
             'recommended_deposits': DepositProductSerializer(top_deposit_products, many=True).data,
-        }
-    return Response({'recommended_products': recommended_products_data})
+        })
