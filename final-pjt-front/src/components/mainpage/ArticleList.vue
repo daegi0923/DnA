@@ -54,6 +54,7 @@ const getNewsHeadlines = async () => {
 
 onMounted(() => {
   getNewsHeadlines();
+  console.log(limitedNewsData.value);
 });
 </script>
 
