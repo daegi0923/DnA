@@ -237,7 +237,7 @@ export default {
 .current-location-btn {
   width: 5px;
   position: absolute;
-  bottom: 50px;
+  bottom: 130px;
   right: 200px;
   z-index: 100;
 }
