@@ -24,9 +24,10 @@
 
 ## 서비스 소개
 ### 시작 페이지
-![Untitled 1](https://github.com/daegi0923/Finance_Teacher/assets/156268579/b4fd97ca-66b2-4995-837d-83aafe7476aa)
+![6f815a4d-c777-4ab3-8b72-baf35e69c71e](https://github.com/daegi0923/Finance_Teacher/assets/156268579/0bc0dd67-1143-4e3c-8628-a304698e9346)
 ### 메인페이지
-![Untitled 2](https://github.com/daegi0923/Finance_Teacher/assets/156268579/b7ddbe70-0b29-44f7-bd1a-d91b70976269)
+![Untitled 1](https://github.com/daegi0923/Finance_Teacher/assets/156268579/b4fd97ca-66b2-4995-837d-83aafe7476aa)
+
 
 - carousel을 이용하여 핵심 기능 설명
 - 금융 단어장 API를 이용한 단어장 기능
@@ -34,15 +35,17 @@
 - 네이버 경제 뉴스 크롤링으로 실시간 뉴스 제공과 링크제공
 
 ### 예금/적금 비교
+![Untitled 2](https://github.com/daegi0923/Finance_Teacher/assets/156268579/b7ddbe70-0b29-44f7-bd1a-d91b70976269)
+
 ![Untitled 3](https://github.com/daegi0923/Finance_Teacher/assets/156268579/14f5b6f2-323e-49b0-8aee-88a543514e82)
-![Untitled 4](https://github.com/daegi0923/Finance_Teacher/assets/156268579/6d853b90-50da-4f1e-b9f3-5b5916faf3fc)
 
 - API를 사용하여 정보 데이터베이스에 저장
 - 비교 메인 페이지에서 예금과 적금 페이지 분리
 - 오름차순 내림차
 
 ### 은행찾기
-![Untitled 5](https://github.com/daegi0923/Finance_Teacher/assets/156268579/e0b2f5ae-ce3c-4059-b62e-7d28d9eb3fe3)
+![Untitled 4](https://github.com/daegi0923/Finance_Teacher/assets/156268579/6d853b90-50da-4f1e-b9f3-5b5916faf3fc)
+
 
 - 카카오맵 API 이용
 - 키워드와 선택창을 이용한 검색 기능 2가지 제공
@@ -50,19 +53,24 @@
 - 마커 클릭시 관련 사이트로 이동
 
 ### 환율계산기
-![Untitled 6](https://github.com/daegi0923/Finance_Teacher/assets/156268579/3a983a27-ce25-4781-af1e-7dcbc6238d7a)
+![Untitled 5](https://github.com/daegi0923/Finance_Teacher/assets/156268579/e0b2f5ae-ce3c-4059-b62e-7d28d9eb3fe3)
+
 
 - API를 활용한 실시간 환율 정보 제공
 - 환율 계산기 구현
 - 나라 선택시 해당 국기 도출
 
 ### 저축도우미
-![Untitled 7](https://github.com/daegi0923/Finance_Teacher/assets/156268579/eb3da466-18ba-4002-913d-288b1eb4e4e2)
+![Untitled 6](https://github.com/daegi0923/Finance_Teacher/assets/156268579/3a983a27-ce25-4781-af1e-7dcbc6238d7a)
+
 
 - Gemini를 이용한 챗봇
 - 제공 저축 서비스를 스크립트로 제공하여 추천 저축플레너
 - 훈장님의 성격 적용
 ### 게시판
+![Untitled 7](https://github.com/daegi0923/Finance_Teacher/assets/156268579/eb3da466-18ba-4002-913d-288b1eb4e4e2)
+### 회원 페이지
+![Untitled](https://github.com/daegi0923/Finance_Teacher/assets/156268579/a747d306-c18f-4f19-aa29-43c868e429f1)
 
 # 개발 계획 및 역할 구분
 | ID | Task | 상위 페이지 | 내용  | 프론트엔드 | 백엔드 | 데이터 | 담당 | 완료여부(날짜) | 구현정도 |
