@@ -1,18 +1,10 @@
 # Finance Teacher 개요
 
 ## 팀원
-
-**여대기<버니>**
-
-**팀장**
-
-[https://github.com/daegi0923](https://github.com/daegi0923)
-
-**진아현<푸린>**
-
-**팀원**
-
-[https://github.com/akeroroh](https://github.com/akeroroh)
+| 이름       | 역할  | GitHub                                      |
+|------------|-------|---------------------------------------------|
+| 여대기 (버니) | 팀장  | [daegi0923](https://github.com/daegi0923) |
+| 진아현 (푸린) | 팀원  | [akeroroh](https://github.com/akeroroh)   |
 
 ## 개발 기간
 - 2024.05.08 ~ 2024.05.24
