@@ -115,7 +115,7 @@
 <img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/4f360ced-a27e-4e29-bb87-f11e93792c06" width="50" height="50"> <!-- Github -->
 
 # ERD
-<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/02ad2ba8-f6ca-400d-8b11-47d7b1f87c71"> <!-- ERD -->
+![erd](https://github.com/daegi0923/Finance_Teacher/assets/156268579/720177c4-5daf-4e29-a560-a7cd0df7808a)
 
 # 컴포넌트 구조
 ![component](https://github.com/daegi0923/Finance_Teacher/assets/156268579/9b992016-9526-4b84-a1cd-64ae913d3d7d)
