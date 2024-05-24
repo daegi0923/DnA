@@ -118,8 +118,13 @@
 <img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/02ad2ba8-f6ca-400d-8b11-47d7b1f87c71"> <!-- ERD -->
 
 # 컴포넌트 구조
+![component](https://github.com/daegi0923/Finance_Teacher/assets/156268579/9b992016-9526-4b84-a1cd-64ae913d3d7d)
 
+# 와이어 프레임
+![메인](https://github.com/daegi0923/Finance_Teacher/assets/156268579/918b701b-ae0a-4265-8e46-8e602f26e59d)
 
+# Gannt Chart
+Gantt Chart : https://docs.google.com/spreadsheets/d/1_iWdYUGgrhrCgOvh__XfykpT9SQG-9DDgWWVLmndeuY/edit?usp=sharing
 # 개발일지
 | 날짜 | 푸린 | 버니 |
 | --- | --- | --- |
