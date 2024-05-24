@@ -34,8 +34,8 @@
               <p>최고 우대 금리 : {{ option.intr_rate2 }}</p>
               <p>저축 기간 : {{ option.save_trm }}</p>
               <v-btn v-if="store.isLogin" @click="subscribeProduct(option.id)" :class="{ 'subscribe': !isSubscribedList[option.id], 'unsubscribe': isSubscribedList[option.id] }">
-                <span v-if="isSubscribedList[option.id]">구독 취소 {{ isSubscribedList.id }}</span>
-                <span v-else="isSubscribedList[option.id]">구독 {{ isSubscribedList.id }}</span>
+                <span v-if="isSubscribedList[option.id]">가입 취소 {{ isSubscribedList.id }}</span>
+                <span v-else="isSubscribedList[option.id]">가입 {{ isSubscribedList.id }}</span>
               </v-btn>
             </v-card>
           </div>
