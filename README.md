@@ -95,34 +95,27 @@
 
 
 
-## 기술스택
-
+## 기술스택 
 ### Frontend
-![CSS](https://github.com/daegi0923/Finance_Teacher/assets/156268579/844bf7c2-b437-493e-bd56-c8f8e2f9a0ac)
-![HTML](https://github.com/daegi0923/Finance_Teacher/assets/156268579/abf1b0c3-c9b4-4d1b-86b4-70e6b81fff14)
-![JavaScript](https://github.com/daegi0923/Finance_Teacher/assets/156268579/699fa91c-d9ae-4cc8-a94c-4bfd212d13ee)
-![NodeJS](https://github.com/daegi0923/Finance_Teacher/assets/156268579/3682f902-0df9-4dfd-af3d-fe7984a79adc)
-![Vue](https://github.com/daegi0923/Finance_Teacher/assets/156268579/a824421a-b4c6-4ede-a0a3-bc7f7b0a4eac)
-![Bootstrap](https://github.com/daegi0923/Finance_Teacher/assets/156268579/ec6f4c82-c51f-4ec7-a9ea-bc7c0e9186a2)
-
-
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/844bf7c2-b437-493e-bd56-c8f8e2f9a0ac" width="50" height="50"> <!-- CSS -->
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/abf1b0c3-c9b4-4d1b-86b4-70e6b81fff14" width="50" height="50"> <!-- HTML -->
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/699fa91c-d9ae-4cc8-a94c-4bfd212d13ee" width="50" height="50"> <!-- JavaScript -->
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/3682f902-0df9-4dfd-af3d-fe7984a79adc" width="50" height="50"> <!-- NodeJS -->
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/a824421a-b4c6-4ede-a0a3-bc7f7b0a4eac" width="50" height="50"> <!-- Vue -->
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/ec6f4c82-c51f-4ec7-a9ea-bc7c0e9186a2" width="50" height="50"> <!-- Bootstrap -->
 
 ### Backend
-
-![Django](https://github.com/daegi0923/Finance_Teacher/assets/156268579/8615975f-6d58-481e-8193-0dd1fe7aaf7f)
-![Python-Dark](https://github.com/daegi0923/Finance_Teacher/assets/156268579/255e8516-1621-46a0-8873-175dac677949)
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/8615975f-6d58-481e-8193-0dd1fe7aaf7f" width="50" height="50"> <!-- Django -->
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/255e8516-1621-46a0-8873-175dac677949" width="50" height="50"> <!-- Python -->
 
 ### Database
-
-![SQLite](https://github.com/daegi0923/Finance_Teacher/assets/156268579/d08e0340-15d6-46cf-bd13-5667b510ba07)
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/d08e0340-15d6-46cf-bd13-5667b510ba07" width="50" height="50"> <!-- SQLite -->
 
 ### Communication
-
-![Github-Dark](https://github.com/daegi0923/Finance_Teacher/assets/156268579/4f360ced-a27e-4e29-bb87-f11e93792c06)
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/4f360ced-a27e-4e29-bb87-f11e93792c06" width="50" height="50"> <!-- Github -->
 
 # ERD
-![ERD](https://github.com/daegi0923/Finance_Teacher/assets/156268579/02ad2ba8-f6ca-400d-8b11-47d7b1f87c71)
-
+<img src="https://github.com/daegi0923/Finance_Teacher/assets/156268579/02ad2ba8-f6ca-400d-8b11-47d7b1f87c71" width="50" height="50"> <!-- ERD -->
 
 # 컴포넌트 구조
 
